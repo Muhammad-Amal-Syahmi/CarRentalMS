@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CarRentalMS.DataAcess;
+using PagedList;
 
 namespace CarRentalMS.Controllers
 {
@@ -13,9 +14,29 @@ namespace CarRentalMS.Controllers
         private AWS_POSTGREQL_TRIALEntities db = new AWS_POSTGREQL_TRIALEntities();
 
         // GET: Cars
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchCarModel, string searchLocation, int? page)
         {
-            return View(await db.Cars.OrderBy(car => car.Id).ToListAsync());
+            if (searchCarModel == null)
+            {
+                searchCarModel = "";
+            }
+            if (searchLocation == null)
+            {
+                searchLocation = "";
+            }
+
+            IQueryable<Car> qrySearch = db.Cars
+                .Where(car =>
+                    car.CarModel.ToLower().Contains(searchCarModel.ToLower())
+                    &&
+                    car.Location.ToLower().Contains(searchLocation.ToLower())
+                )
+                .OrderBy(car => car.Id)
+                .Select(car => car)
+                ;
+            var qryAsync = await qrySearch.ToListAsync();
+
+            return View(qryAsync.ToPagedList(page ?? 1, 10));
         }
 
         // GET: Cars/Details/5

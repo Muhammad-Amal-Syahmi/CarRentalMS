@@ -32,7 +32,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PricePerDay)
+            @String.Format("{0:c}",  Model.PricePerDay)
         </dd>
 
     </dl>
