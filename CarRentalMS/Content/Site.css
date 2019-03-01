@@ -42,6 +42,14 @@ thead th{
     width: 70px;
 }
 
+.btn-inside-options{
+    width: 120px;
+}
+
+.btn-back-list{
+    margin-top: 20px;
+}
+
 .form-group{
     padding-right:10px;
 }

@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="page-title">Details</h2>
+<h2 class="page-title">Details of Car @Model.Id</h2>
 
 <div>
-    <h4>Car</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -39,5 +38,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class="btn btn-warning"}) 
-    @Html.ActionLink("Back to List", "Index", new { area=""}, new { @class="btn btn-outline-success"})
+    @Html.ActionLink("Back to List", "Index", new { area=""}, new { @class="btn btn-outline-info"})
 </p>
