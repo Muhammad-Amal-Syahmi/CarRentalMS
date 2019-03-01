@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using CarRentalMS.DataAcess;
 
@@ -18,7 +15,7 @@ namespace CarRentalMS.Controllers
         // GET: Cars
         public async Task<ActionResult> Index()
         {
-            return View(await db.Cars.ToListAsync());
+            return View(await db.Cars.OrderBy(car => car.Id).ToListAsync());
         }
 
         // GET: Cars/Details/5

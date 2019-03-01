@@ -7,12 +7,32 @@
 
 <h2 class="page-title">List of Cars</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="container">
+    @using (Html.BeginForm("Index", "Car", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="form-group">
+                @Html.TextBox("SearchLocation", null, new { @class = "form-control", @placeholder = "e.g Gelugor" })
+            </div>
+            <div class="form-group">
+                @Html.TextBox("SearchCarModel", null, new { @class = "form-control", @placeholder = "e.g Perodua Viva" })
+            </div>
+            <div class="form-group ">
+                <input type="submit" value="Search" class="btn btn-info btn-search-car" />
+            </div>
+            <div class="form-group">
+                @Html.ActionLink("Add Car", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>
+
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.CarModel)
             </th>
@@ -20,9 +40,8 @@
                 @Html.DisplayNameFor(model => model.Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PricePerDay)
+                Options
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -48,19 +67,19 @@
                     rowColor = "table-primary";
                 }
                 <tr class=@rowColor>
+                    <td style="width: 7%">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CarModel)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Location)
                     </td>
-                    <td>
-                        RM @String.Format("{0:0.00}", item.PricePerDay)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <td style="width: 23%">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id}, new { @class="btn btn-warning btn-options"})
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-options" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-options" })
                     </td>
                 </tr>
                 countData++;
