@@ -6,6 +6,7 @@
 }
 
 <h2 class="page-title">List of Cars</h2>
+@Html.ActionLink("Add Car", "Create", "Cars", new { area = "" }, new { @class = "btn btn-primary btn-add-car float-right" })
 
 <table id="table_id" class="table table-hover table-bordered table-striped">
     <thead>
@@ -52,6 +53,6 @@
 <script>
 
     $('#table_id').dataTable({});
-    
+
 
 </script>

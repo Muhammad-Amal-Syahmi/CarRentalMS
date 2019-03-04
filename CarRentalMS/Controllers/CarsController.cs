@@ -1,52 +1,26 @@
-﻿using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CarRentalMS.DataAcess;
+using CarRentalMS.Services.Interfaces;
 
 namespace CarRentalMS.Controllers
 {
     public class CarsController : Controller
     {
-        private AWS_POSTGREQL_TRIALEntities db = new AWS_POSTGREQL_TRIALEntities();
+        private ICarServices _carServices;
+
+        public CarsController(ICarServices carServices)
+        {
+            _carServices = carServices;
+        }
 
         // GET: Cars
         public async Task<ActionResult> Index()
         {
-
-            IQueryable<Car> qrySearch = db.Cars
-                .OrderBy(car => car.Id)
-                .Select(car => car);
-
-
-            return View(await qrySearch.ToListAsync());
+            return View(await _carServices.GetAllCars());
         }
-        //public async Task<ActionResult> Index(string searchCarModel, string searchLocation, int? page)
-        //{
-        //    if (searchCarModel == null)
-        //    {
-        //        searchCarModel = "";
-        //    }
-        //    if (searchLocation == null)
-        //    {
-        //        searchLocation = "";
-        //    }
-
-        //    IQueryable<Car> qrySearch = db.Cars
-        //        .Where(car =>
-        //            car.CarModel.ToLower().Contains(searchCarModel.ToLower())
-        //            &&
-        //            car.Location.ToLower().Contains(searchLocation.ToLower())
-        //        )
-        //        .OrderBy(car => car.Id)
-        //        .Select(car => car)
-        //        ;
-        //    var qryAsync = await qrySearch.ToListAsync();
-
-        //    return View(qryAsync.ToPagedList(page ?? 1, 10));
-        //}
 
         // GET: Cars/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -55,7 +29,7 @@ namespace CarRentalMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = await db.Cars.FindAsync(id);
+            Car car = await _carServices.FindCar(id);
             if (car == null)
             {
                 return HttpNotFound();
@@ -78,10 +52,7 @@ namespace CarRentalMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                int max = await db.Cars.MaxAsync(c => c.Id);
-                car.Id = ++max;
-                db.Cars.Add(car);
-                await db.SaveChangesAsync();
+                await _carServices.AddCar(car);
                 return RedirectToAction("Index");
             }
 
@@ -95,7 +66,7 @@ namespace CarRentalMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = await db.Cars.FindAsync(id);
+            Car car = await _carServices.FindCar(id);
             if (car == null)
             {
                 return HttpNotFound();
@@ -112,8 +83,7 @@ namespace CarRentalMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(car).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                await _carServices.UpdateCar(car);
                 return RedirectToAction("Index");
             }
             return View(car);
@@ -126,7 +96,7 @@ namespace CarRentalMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = await db.Cars.FindAsync(id);
+            Car car = await _carServices.FindCar(id);
             if (car == null)
             {
                 return HttpNotFound();
@@ -139,9 +109,8 @@ namespace CarRentalMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Car car = await db.Cars.FindAsync(id);
-            db.Cars.Remove(car);
-            await db.SaveChangesAsync();
+            Car car = await _carServices.FindCar(id);
+            await _carServices.DeleteCar(car);
             return RedirectToAction("Index");
         }
 
@@ -149,7 +118,7 @@ namespace CarRentalMS.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _carServices.Dispose();
             }
             base.Dispose(disposing);
         }

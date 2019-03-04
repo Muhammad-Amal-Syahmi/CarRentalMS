@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -259,6 +265,10 @@
     <ProjectReference Include="..\CarRentalMS.DataAcess\CarRentalMS.DataAcess.csproj">
       <Project>{069eaaeb-7117-475d-bffe-4c02deffff1c}</Project>
       <Name>CarRentalMS.DataAcess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CarRentalMS.Services\CarRentalMS.Services.csproj">
+      <Project>{fc1bc193-123e-44fa-bcc1-adb0a30d7b86}</Project>
+      <Name>CarRentalMS.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
