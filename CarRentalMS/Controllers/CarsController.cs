@@ -65,10 +65,12 @@ namespace CarRentalMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,CarModel,Location,PricePerDay")] Car car)
+        public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] Car car)
         {
             if (ModelState.IsValid)
             {
+                int max = await db.Cars.MaxAsync(c => c.Id);
+                car.Id = ++max;
                 db.Cars.Add(car);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
