@@ -33,7 +33,7 @@
     }
 </div>
 
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -51,27 +51,15 @@
     </thead>
     <tbody>
         @{
-            var countData = 0;
-
             if (Model.Count() == 0)
             {
                 <tr class="text-center">
                     <td colspan="5">No Cars</td>
                 </tr>
             }
-
             foreach (var item in Model)
             {
-                string rowColor;
-                if (countData % 2 == 0)
-                {
-                    rowColor = "table-light";
-                }
-                else
-                {
-                    rowColor = "table-primary";
-                }
-                <tr class=@rowColor>
+                <tr class="">
                     <td style="width: 7%">
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
@@ -87,7 +75,6 @@
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-options" })
                     </td>
                 </tr>
-                countData++;
             }
 
         }
