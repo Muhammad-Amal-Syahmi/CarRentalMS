@@ -61,3 +61,9 @@ thead th{
 .table-striped tbody tr:nth-of-type(even) {
     background-color: #bfe3f3;
 }
+
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}

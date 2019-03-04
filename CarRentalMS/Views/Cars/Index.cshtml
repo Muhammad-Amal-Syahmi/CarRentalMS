@@ -1,7 +1,4 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-
-@model IPagedList<CarRentalMS.DataAcess.Car>
+﻿@model IEnumerable<CarRentalMS.DataAcess.Car>
 
 @{
     ViewBag.Title = "Index";
@@ -10,30 +7,7 @@
 
 <h2 class="page-title">List of Cars</h2>
 
-<div class="container">
-    @using (Html.BeginForm("Index", "Cars", FormMethod.Get))
-    {
-        <div class="row">
-            <div class="row col">
-                <div class="form-group">
-                    @Html.TextBox("SearchLocation", null, new { @class = "form-control", @placeholder = "e.g Gelugor" })
-                </div>
-                <div class="form-group">
-                    @Html.TextBox("SearchCarModel", null, new { @class = "form-control", @placeholder = "e.g Perodua Viva" })
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Search" class="btn btn-info btn-search-car" />
-                </div>
-            </div>
-
-            <div class="form-group col-3">
-                @Html.ActionLink("Add Car", "Create", new { area = "" }, new { @class = "btn btn-primary float-right" })
-            </div>
-        </div>
-    }
-</div>
-
-<table class="table table-hover table-bordered table-striped">
+<table id="table_id" class="table table-hover table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -51,12 +25,6 @@
     </thead>
     <tbody>
         @{
-            if (Model.Count() == 0)
-            {
-                <tr class="text-center">
-                    <td colspan="5">No Cars</td>
-                </tr>
-            }
             foreach (var item in Model)
             {
                 <tr class="">
@@ -76,30 +44,14 @@
                     </td>
                 </tr>
             }
-
         }
-
     </tbody>
 
 </table>
 
-<div>
-    @Html.PagedListPager(
-        Model,
-        page => Url.Action(
-            "Index",
-            new
-            {
-                page,
-                SearchCarModel = Request.QueryString["SearchCarModel"],
-                SearchLocation = Request.QueryString["SearchLocation"]
-            }
-        ),
-        new PagedListRenderOptions()
-        {
-            UlElementClasses= new[] {"pagination"},
-            LiElementClasses= new[] {"page-item","page-link"},
-        
-        }
-     )
-</div>
+<script>
+
+    $('#table_id').dataTable({});
+    
+
+</script>

@@ -245,7 +245,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\DataTable\css\" />
+    <Folder Include="Content\DataTable\images\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\DataTable\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
