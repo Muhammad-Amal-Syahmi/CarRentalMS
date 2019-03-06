@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using CarRentalMS.Infrastructure;
 using CarRentalMS.Services;
 using CarRentalMS.Services.Interfaces;
 
@@ -22,6 +23,8 @@ namespace CarRentalMS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AutomapperWebProfile.Run();
         }
 
         private void RegisterAutofac()

@@ -1,8 +1,10 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CarRentalMS.DataAcess;
 using CarRentalMS.Services.Interfaces;
+using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
@@ -18,7 +20,10 @@ namespace CarRentalMS.Controllers
         // GET: Cars
         public async Task<ActionResult> Index()
         {
-            return View(await _carServices.GetAllCars());
+            var carDM = await _carServices.GetAllCars();
+            IEnumerable<CarViewModel> carVM = new List<CarViewModel>();
+            AutoMapper.Mapper.Map(carDM, carVM);
+            return View(carVM);
         }
 
         // GET: Cars/Details/5
@@ -28,12 +33,14 @@ namespace CarRentalMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = await _carServices.FindCar(id);
-            if (car == null)
+            var carDM = await _carServices.FindCar(id);
+            CarViewModel carVM = new CarViewModel();
+            AutoMapper.Mapper.Map(carDM, carVM);
+            if (carVM == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View(carVM);
         }
 
         // GET: Cars/Create
@@ -45,15 +52,17 @@ namespace CarRentalMS.Controllers
         // POST: Cars/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] Car car)
+        public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] CarViewModel carVM)
         {
             if (ModelState.IsValid)
             {
-                await _carServices.AddCar(car);
+                Car carDM = new Car();
+                AutoMapper.Mapper.Map(carVM, carDM);
+                await _carServices.AddCar(carDM);
                 return RedirectToAction("Index");
             }
 
-            return View(car);
+            return View(carVM);
         }
 
         // GET: Cars/Edit/5
@@ -63,25 +72,29 @@ namespace CarRentalMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = await _carServices.FindCar(id);
-            if (car == null)
+            Car carDM = await _carServices.FindCar(id);
+            CarViewModel carVM = new CarViewModel();
+            AutoMapper.Mapper.Map(carDM, carVM);
+            if (carVM == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View(carVM);
         }
 
         // POST: Cars/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,CarModel,Location,PricePerDay")] Car car)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,CarModel,Location,PricePerDay")] CarViewModel carVM)
         {
             if (ModelState.IsValid)
             {
-                await _carServices.UpdateCar(car);
+                Car carDM = new Car();
+                AutoMapper.Mapper.Map(carVM, carDM);
+                await _carServices.UpdateCar(carDM);
                 return RedirectToAction("Index");
             }
-            return View(car);
+            return View(carVM);
         }
 
         // GET: Cars/Delete/5
@@ -91,12 +104,14 @@ namespace CarRentalMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = await _carServices.FindCar(id);
-            if (car == null)
+            Car carDM = await _carServices.FindCar(id);
+            CarViewModel carVM = new CarViewModel();
+            AutoMapper.Mapper.Map(carDM, carVM);
+            if (carVM == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View(carVM);
         }
 
         // POST: Cars/Delete/5
