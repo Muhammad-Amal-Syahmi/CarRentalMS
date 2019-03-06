@@ -48,9 +48,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\CarRentalMS.DataAcess\CarRentalMS.DataAcess.csproj">
+    <ProjectReference Include="..\CarRentalMS.DataAcess\CarRentalMS.DataAccess.csproj">
       <Project>{069EAAEB-7117-475D-BFFE-4C02DEFFFF1C}</Project>
-      <Name>CarRentalMS.DataAcess</Name>
+      <Name>CarRentalMS.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

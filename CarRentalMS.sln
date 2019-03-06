@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalMS", "CarRentalMS\CarRentalMS.csproj", "{3DB37406-3949-44C9-B44D-D2C2AD980023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalMS.DataAcess", "CarRentalMS.DataAcess\CarRentalMS.DataAcess.csproj", "{069EAAEB-7117-475D-BFFE-4C02DEFFFF1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalMS.DataAccess", "CarRentalMS.DataAcess\CarRentalMS.DataAccess.csproj", "{069EAAEB-7117-475D-BFFE-4C02DEFFFF1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalMS.Services", "CarRentalMS.Services\CarRentalMS.Services.csproj", "{FC1BC193-123E-44FA-BCC1-ADB0A30D7B86}"
 EndProject

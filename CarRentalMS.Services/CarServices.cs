@@ -13,13 +13,9 @@ namespace CarRentalMS.Services
 
         public async Task<IEnumerable<Car>> GetAllCars()
         {
-            IQueryable<Car> qrySearch;
-
-            qrySearch = _dbContext.Cars
+            return await _dbContext.Cars
                 .OrderBy(c => c.Id)
-                .Select(c => c);
-
-            return await qrySearch.ToListAsync();
+                .Select(c => c).ToListAsync();
         }
 
         public async Task AddCar(Car car)

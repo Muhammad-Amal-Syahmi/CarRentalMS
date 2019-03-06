@@ -262,9 +262,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CarRentalMS.DataAcess\CarRentalMS.DataAcess.csproj">
+    <ProjectReference Include="..\CarRentalMS.DataAcess\CarRentalMS.DataAccess.csproj">
       <Project>{069eaaeb-7117-475d-bffe-4c02deffff1c}</Project>
-      <Name>CarRentalMS.DataAcess</Name>
+      <Name>CarRentalMS.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\CarRentalMS.Services\CarRentalMS.Services.csproj">
       <Project>{fc1bc193-123e-44fa-bcc1-adb0a30d7b86}</Project>
