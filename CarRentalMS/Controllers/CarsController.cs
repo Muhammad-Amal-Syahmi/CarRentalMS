@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -10,7 +11,7 @@ namespace CarRentalMS.Controllers
 {
     public class CarsController : Controller
     {
-        private ICarServices _carServices;
+        private readonly ICarServices _carServices;
 
         public CarsController(ICarServices carServices)
         {
@@ -20,7 +21,7 @@ namespace CarRentalMS.Controllers
         // GET: Cars
         public async Task<ActionResult> Index()
         {
-            var carDM = await _carServices.GetAllCars();
+            var carDM = await _carServices.GetAllCars().ToListAsync();
             IEnumerable<CarViewModel> carVM = new List<CarViewModel>();
             AutoMapper.Mapper.Map(carDM, carVM);
             return View(carVM);
@@ -124,13 +125,13 @@ namespace CarRentalMS.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _carServices.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        _carServices.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

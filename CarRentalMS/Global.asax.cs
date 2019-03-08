@@ -8,6 +8,10 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using CarRentalMS.DataAcess.Infrastructure;
+using CarRentalMS.DataAcess.Infrastructure.Interfaces;
+using CarRentalMS.DataAcess.Repositories;
+using CarRentalMS.DataAcess.Repositories.Interfaces;
 using CarRentalMS.Infrastructure;
 using CarRentalMS.Services;
 using CarRentalMS.Services.Interfaces;
@@ -35,6 +39,9 @@ namespace CarRentalMS
 
             //manual registration of types
             builder.RegisterType<CarServices>().As<ICarServices>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<CarRepository>().As<ICarRepository>();
+            builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
             var container = builder.Build();
 
