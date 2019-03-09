@@ -8,79 +8,77 @@
 
 <h2 class="page-title">List of Cars</h2>
 
-<div class="container">
-    <div class="row">
-        <div class="col-11">
-            @using (Html.BeginForm("Index", "Cars", FormMethod.Get))
-            {
-                <div class="row">
-                    <div class="form-group">
-                        @Html.Label("Pickup Location")
-                        @Html.TextBox("SearchLocation", null, new { @class = "form-control", @placeholder = "e.g Gelugor" })
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Car Model")
-                        @Html.TextBox("SearchCarModel", null, new { @class = "form-control", @placeholder = "e.g Perodua Viva" })
-                    </div>
-                    <div class="form-group " style="margin-top:30px;">
-                        <input type="submit" value="Search" class="btn btn-info btn-search-car" />
-                    </div>
+<div class="container search-form">
+    <div class="row ">
+        @using (Html.BeginForm("Index", "Cars", FormMethod.Get))
+        {
+            <div class="form-inline">
+                <div class="form-group">
+                    @Html.TextBox("SearchLocation", null, new { @class = "form-control", @placeholder = "Pickup Location" })
                 </div>
-            }
-        </div>
-        <div style="font-size:3em;">
-            <a href="@Url.Action("Create","Cars")"  data-toggle="tooltip" data-placement="top" title="Add New Car"><i class="fas fa-plus-circle text-primary"></i></a>
+                <div class="form-group">
+                    @Html.TextBox("SearchCarModel", null, new { @class = "form-control", @placeholder = "Car Model" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-info form-control btn-search-car" />
+                </div>
+            </div>
+        }
+        <div class="ml-auto" style="font-size:2em;">
+            <a href="@Url.Action("Create","Cars")" data-toggle="tooltip" data-placement="top" title="Add New Car"><i class="fas fa-plus-circle text-success"></i></a>
         </div>
     </div>
 </div>
 
-
-<table id="table_id" class="table table-hover table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayName("Id")
-            </th>
-            <th>
-                @Html.DisplayName("Car Model")
-            </th>
-            <th>
-                @Html.DisplayName("Pickup Location")
-            <th>
-                Options
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (var item in Model)
-            {
-                <tr class="">
-                    <td style="width: 7%">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CarModel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    <td style="width: 10%">
-                        <span style="font-size: 1.5em;">
-                            <a href="@Url.Action("Edit", new { id = item.Id})"  data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
-                            <a href="@Url.Action("Details", new { id = item.Id})"  data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
-                            <a href="@Url.Action("Delete", new { id = item.Id})"  data-toggle="tooltip" data-placement="top" title="Remove"><i class="fas fa-trash-alt text-danger"></i></a>
-                        </span>
-                    </td>
-                </tr>
+<div class="car-table">
+    <table id="table_id" class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Id")
+                </th>
+                <th>
+                    @Html.DisplayName("Car Model")
+                </th>
+                <th>
+                    @Html.DisplayName("Pickup Location")
+                <th>
+                    Options
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr class="">
+                        <td style="width: 7%">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CarModel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td style="width: 10%">
+                            <span style="font-size: 1.5em;">
+                                <a href="@Url.Action("Edit", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
+                                <a href="@Url.Action("Delete", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fas fa-trash-alt text-danger"></i></a>
+                            </span>
+                        </td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-
-</table>
+        </tbody>
+    </table>
+</div>
 
 <script>
 
-    $('#table_id').dataTable({});
+    $('#table_id').dataTable({
+        "lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]]
+    });
 
 </script>
