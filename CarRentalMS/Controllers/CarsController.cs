@@ -19,9 +19,11 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string SearchCarModel, string SearchLocation)
         {
-            var carDM = await _carServices.GetAllCars().ToListAsync();
+            var carDM = await _carServices.GetAllCars(
+                SearchCarModel,
+                SearchLocation).ToListAsync();
             IEnumerable<CarViewModel> carVM = new List<CarViewModel>();
             AutoMapper.Mapper.Map(carDM, carVM);
             return View(carVM);

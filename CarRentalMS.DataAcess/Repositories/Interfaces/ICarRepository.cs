@@ -7,8 +7,8 @@ using CarRentalMS.DataAcess.Infrastructure.Interfaces;
 
 namespace CarRentalMS.DataAcess.Repositories.Interfaces
 {
-    public interface ICarRepository: IGenericRepository<Car>
+    public interface ICarRepository : IGenericRepository<Car>
     {
-
+        IQueryable<Car> GetCarsByFilter(string carModel, string location);
     }
 }

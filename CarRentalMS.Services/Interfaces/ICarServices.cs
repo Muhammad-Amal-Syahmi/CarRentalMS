@@ -6,7 +6,7 @@ namespace CarRentalMS.Services.Interfaces
 {
     public interface ICarServices
     {
-        IQueryable<Car> GetAllCars();
+        IQueryable<Car> GetAllCars(string carModel, string location);
         Task AddCar(Car car);
         Task UpdateCar(Car car);
         Task DeleteCar(Car car);

@@ -47,7 +47,7 @@ thead th{
 }
 
 .btn-back-list{
-    margin-top: 20px;
+    margin-left: 5px;
 }
 
 .form-group{
@@ -55,7 +55,7 @@ thead th{
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f7f7f7;
+    background-color: #f6f6f6;
 }
 
 .table-striped tbody tr:nth-of-type(even) {

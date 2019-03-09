@@ -19,8 +19,13 @@ namespace CarRentalMS.Services
             _carRepository = carRepository;
         }
 
-        public IQueryable<Car> GetAllCars()
+        public IQueryable<Car> GetAllCars(string carModel, string location)
         {
+            if (!String.IsNullOrEmpty(carModel) ||
+                !String.IsNullOrEmpty(location))
+            {
+                return _carRepository.GetCarsByFilter(carModel, location);
+            }
             return _carRepository.GetAll();
         }
 

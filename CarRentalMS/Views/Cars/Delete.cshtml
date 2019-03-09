@@ -42,8 +42,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> 
-            @Html.ActionLink("Back to List", "Index", new { area="" }, new { @class="btn btn-outline-info"})
+            <input type="submit" value="Delete" class="btn btn-danger btn-inside-options" /> 
+            @Html.ActionLink("Back to List", "Index", new { area="" }, new { @class= "btn btn-outline-info btn-inside-options btn-back-list" })
         </div>
     }
 </div>
