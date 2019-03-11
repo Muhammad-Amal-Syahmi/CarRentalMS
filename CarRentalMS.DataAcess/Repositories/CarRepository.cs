@@ -1,11 +1,12 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using CarRentalMS.DataAcess.Infrastructure;
-using CarRentalMS.DataAcess.Infrastructure.Interfaces;
-using CarRentalMS.DataAcess.Repositories.Interfaces;
+using CarRentalMS.DataAccess.Infrastructure;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess.Repositories.Interfaces;
+using CarRentalMS.DataAccess;
 
-namespace CarRentalMS.DataAcess.Repositories
+namespace CarRentalMS.DataAccess.Repositories
 {
     public class CarRepository : GenericRepository<Car>, ICarRepository
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarRentalMS.DataAcess.Infrastructure.Interfaces
+namespace CarRentalMS.DataAccess.Infrastructure.Interfaces
 {
     public interface IGenericRepository<T> where T: class
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CarRentalMS.DataAcess;
-using CarRentalMS.DataAcess.Infrastructure.Interfaces;
-using CarRentalMS.DataAcess.Repositories.Interfaces;
+using CarRentalMS.DataAccess;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess.Repositories.Interfaces;
 using CarRentalMS.Services.Interfaces;
 
 namespace CarRentalMS.Services

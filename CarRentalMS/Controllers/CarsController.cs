@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using CarRentalMS.DataAcess;
+using CarRentalMS.DataAccess;
 using CarRentalMS.Services.Interfaces;
 using CarRentalMS.ViewModels;
 
@@ -47,6 +47,7 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();

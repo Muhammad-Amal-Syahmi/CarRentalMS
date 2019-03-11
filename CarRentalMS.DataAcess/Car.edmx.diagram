@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="5cf8ca7b3bba47b1a519961ce06f4e58" Name="Diagram1">
         <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.Car" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.UserAccount" Width="1.5" PointX="5.625" PointY="0.875" />
+        <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.UserRole" Width="1.5" PointX="3.375" PointY="1.25" />
+        <AssociationConnector Association="AWS_POSTGREQL_TRIALModel.User_ACC_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

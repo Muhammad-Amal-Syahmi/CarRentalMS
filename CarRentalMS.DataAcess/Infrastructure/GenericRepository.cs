@@ -2,9 +2,10 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using CarRentalMS.DataAcess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess;
 
-namespace CarRentalMS.DataAcess.Infrastructure
+namespace CarRentalMS.DataAccess.Infrastructure
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {

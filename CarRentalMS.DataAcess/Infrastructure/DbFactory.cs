@@ -1,7 +1,8 @@
 ﻿using System;
-using CarRentalMS.DataAcess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess;
 
-namespace CarRentalMS.DataAcess.Infrastructure
+namespace CarRentalMS.DataAccess.Infrastructure
 {
     public class DbFactory : IDbFactory
     {

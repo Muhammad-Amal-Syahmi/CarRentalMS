@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CarRentalMS.DataAcess;
+using CarRentalMS.DataAccess;
 
 namespace CarRentalMS.Services.Interfaces
 {

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CarRentalMS.DataAcess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess;
 
-namespace CarRentalMS.DataAcess.Repositories.Interfaces
+namespace CarRentalMS.DataAccess.Repositories.Interfaces
 {
     public interface ICarRepository : IGenericRepository<Car>
     {

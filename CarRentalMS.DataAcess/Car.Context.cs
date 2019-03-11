@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRentalMS.DataAcess
+namespace CarRentalMS.DataAccess
 {
     using System;
     using System.Data.Entity;
@@ -26,5 +26,7 @@ namespace CarRentalMS.DataAcess
         }
     
         public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<UserAccount> UserAccounts { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
     }
 }

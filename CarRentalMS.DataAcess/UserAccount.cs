@@ -12,11 +12,14 @@ namespace CarRentalMS.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Car
+    public partial class UserAccount
     {
-        public int Id { get; set; }
-        public string CarModel { get; set; }
-        public string Location { get; set; }
-        public Nullable<double> PricePerDay { get; set; }
+        public long UserID { get; set; }
+        public string UserName { get; set; }
+        public string EmailAddress { get; set; }
+        public string UserPassword { get; set; }
+        public int UserRoleID { get; set; }
+    
+        public virtual UserRole UserRole { get; set; }
     }
 }
