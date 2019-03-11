@@ -47,7 +47,7 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
