@@ -21,7 +21,7 @@ namespace CarRentalMS.Controllers
         {
             AWS_POSTGREQL_TRIALEntities dbContext = new AWS_POSTGREQL_TRIALEntities();
             var Acc = dbContext.UserAccounts.Where(x => x.UserName == user.UserName).FirstOrDefault();
-            if(user.UserPassword == Decrypt(Acc.UserPassword))
+            if (user.UserPassword == Decrypt(Acc.UserPassword))
             {
                 FormsAuthentication.SetAuthCookie(user.UserName, false); //Persistent Cookie
                 return RedirectToAction("Index", "Home");

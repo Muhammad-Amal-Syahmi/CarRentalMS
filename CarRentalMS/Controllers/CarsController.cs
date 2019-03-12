@@ -54,6 +54,7 @@ namespace CarRentalMS.Controllers
         }
 
         // POST: Cars/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] CarViewModel carVM)
@@ -70,6 +71,7 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,6 +89,7 @@ namespace CarRentalMS.Controllers
         }
 
         // POST: Cars/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,CarModel,Location,PricePerDay")] CarViewModel carVM)
@@ -102,6 +105,7 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -119,6 +123,7 @@ namespace CarRentalMS.Controllers
         }
 
         // POST: Cars/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -127,14 +132,5 @@ namespace CarRentalMS.Controllers
             await _carServices.DeleteCar(car);
             return RedirectToAction("Index");
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        _carServices.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

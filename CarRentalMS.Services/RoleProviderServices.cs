@@ -38,9 +38,9 @@ namespace CarRentalMS.Services
         {
             AWS_POSTGREQL_TRIALEntities dbContext = new AWS_POSTGREQL_TRIALEntities();
             var UserList = dbContext.UserAccounts.ToList();
-            string gg = UserList.Where(u => u.UserName == username).Select(u => u.UserRole.Role).FirstOrDefault().ToString();
-            string[] resultRole = { gg };
-            return resultRole;
+            string userRole = UserList.Where(u => u.UserName == username).Select(u => u.UserRole.Role).FirstOrDefault().ToString();
+            string[] resultUserRole = { userRole };
+            return resultUserRole;
         }
 
         public override string[] GetUsersInRole(string roleName)

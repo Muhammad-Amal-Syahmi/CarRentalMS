@@ -38,6 +38,16 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class= "btn btn-warning btn-inside-options" }) 
-    @Html.ActionLink("Back to List", "Index", new { area=""}, new { @class= "btn btn-outline-info btn-inside-options btn-back-list" })
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning btn-inside-options" })
+    }
+    else
+    {
+        //book now
+        <a href="#" class="btn btn-primary btn-inside-options">Book Now</a>
+    }
+
+    @*@Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "btn btn-outline-info btn-inside-options btn-back-list" })*@
+    <a href='javascript:history.go(-1)' class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
 </p>
