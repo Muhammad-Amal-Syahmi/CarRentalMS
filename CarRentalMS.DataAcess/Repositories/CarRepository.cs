@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using CarRentalMS.DataAccess.Infrastructure;
 using CarRentalMS.DataAccess.Infrastructure.Interfaces;
 using CarRentalMS.DataAccess.Repositories.Interfaces;
-using CarRentalMS.DataAccess;
 
 namespace CarRentalMS.DataAccess.Repositories
 {
@@ -27,7 +26,12 @@ namespace CarRentalMS.DataAccess.Repositories
         public async Task<int> GetNewId()
         {
             int max = await DbContext.Cars.MaxAsync(c => c.Id);
-            return ++max; 
+            return incrementIdByOne(max);
+        }
+
+        public int incrementIdByOne(int value)
+        {
+            return ++value;
         }
     }
 }
