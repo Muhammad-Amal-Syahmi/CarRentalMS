@@ -24,19 +24,9 @@ namespace CarRentalMS.DataAccess.Repositories
                 .AsQueryable();
         }
 
-        public async Task<int> GetNewId()
+        public async Task<int> GetMaxId()
         {
-            int max = await DbContext.Cars.MaxAsync(c => c.Id);
-            return incrementIntByOne(max);
-        }
-
-        public static int incrementIntByOne(int value)
-        {
-            if (value == int.MaxValue)
-            {
-                throw new ArgumentException("Maximum value of id cannot be increment", "NewId");
-            }
-            return ++value;
+            return await DbContext.Cars.MaxAsync(c => c.Id);
         }
     }
 }

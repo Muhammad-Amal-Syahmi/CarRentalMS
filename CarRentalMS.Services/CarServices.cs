@@ -36,7 +36,7 @@ namespace CarRentalMS.Services
             {
                 throw new ArgumentNullException("addCar");
             }
-            car.Id = await _carRepository.GetNewId();
+            car.Id = await GetNewId();
             _carRepository.Create(car);
             await _unitOfWork.SaveChangesAsync();
         }
@@ -60,6 +60,12 @@ namespace CarRentalMS.Services
                 throw new ArgumentNullException("deleteCar");
             _carRepository.Delete(car);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        private async Task<int> GetNewId()
+        {
+            var maxId = await _carRepository.GetMaxId();
+            return ++maxId;
         }
     }
 }

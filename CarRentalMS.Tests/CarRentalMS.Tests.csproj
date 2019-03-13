@@ -88,7 +88,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarRepositoryTests.cs" />
     <Compile Include="CarServicesTests.cs" />
     <Compile Include="CarsControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,7 @@ namespace CarRentalMS.DataAccess.Repositories.Interfaces
     public interface ICarRepository : IGenericRepository<Car>
     {
         IQueryable<Car> GetCarsByFilter(string carModel, string location);
-        Task<int> GetNewId();
+        Task<int> GetMaxId();
         //int incrementIntByOne(int value);
     }
 }
