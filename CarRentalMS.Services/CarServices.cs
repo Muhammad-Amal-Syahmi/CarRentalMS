@@ -24,23 +24,24 @@ namespace CarRentalMS.Services
             if (!String.IsNullOrEmpty(carModel) ||
                 !String.IsNullOrEmpty(location))
             {
-                return _carRepository.GetCarsByFilter(carModel, location);
+                var result = _carRepository.GetCarsByFilter(carModel, location);
+                return result;
             }
             return _carRepository.GetAll();
         }
 
-        public async Task AddCar(Car car)
+        public virtual async Task AddCar(Car car)
         {
             if (car == null)
             {
-                throw new ArgumentNullException("car");
+                throw new ArgumentNullException("addCar");
             }
-            car.Id= await _carRepository.GetNewId();
+            car.Id = await _carRepository.GetNewId();
             _carRepository.Create(car);
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<Car> FindCar(int? id)
+        public virtual async Task<Car> FindCar(int? id)
         {
             return await _carRepository.FindById(id);
         }
@@ -48,7 +49,7 @@ namespace CarRentalMS.Services
         public async Task UpdateCar(Car car)
         {
             if (car == null)
-                throw new ArgumentNullException("car");
+                throw new ArgumentNullException("updateCar");
             _carRepository.Update(car);
             await _unitOfWork.SaveChangesAsync();
         }
@@ -56,7 +57,7 @@ namespace CarRentalMS.Services
         public async Task DeleteCar(Car car)
         {
             if (car == null)
-                throw new ArgumentNullException("car");
+                throw new ArgumentNullException("deleteCar");
             _carRepository.Delete(car);
             await _unitOfWork.SaveChangesAsync();
         }

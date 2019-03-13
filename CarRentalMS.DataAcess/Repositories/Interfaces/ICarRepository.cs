@@ -8,6 +8,6 @@ namespace CarRentalMS.DataAccess.Repositories.Interfaces
     {
         IQueryable<Car> GetCarsByFilter(string carModel, string location);
         Task<int> GetNewId();
-        int incrementIdByOne(int value);
+        //int incrementIntByOne(int value);
     }
 }

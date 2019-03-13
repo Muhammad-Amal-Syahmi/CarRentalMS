@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRentalMS.DataAccess.Infrastructure;
@@ -26,11 +27,15 @@ namespace CarRentalMS.DataAccess.Repositories
         public async Task<int> GetNewId()
         {
             int max = await DbContext.Cars.MaxAsync(c => c.Id);
-            return incrementIdByOne(max);
+            return incrementIntByOne(max);
         }
 
-        public int incrementIdByOne(int value)
+        public static int incrementIntByOne(int value)
         {
+            if (value == int.MaxValue)
+            {
+                throw new ArgumentException("Maximum value of id cannot be increment", "NewId");
+            }
             return ++value;
         }
     }

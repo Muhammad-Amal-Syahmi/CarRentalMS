@@ -1,9 +1,7 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRentalMS.DataAccess.Infrastructure.Interfaces;
-using CarRentalMS.DataAccess;
 
 namespace CarRentalMS.DataAccess.Infrastructure
 {
