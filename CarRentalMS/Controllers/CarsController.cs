@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CarRentalMS.DataAccess;
@@ -21,12 +21,19 @@ namespace CarRentalMS.Controllers
         // GET: Cars
         public async Task<ActionResult> Index(string SearchCarModel, string SearchLocation)
         {
-            var carDM = await _carServices.GetAllCars(
+            try
+            {
+                var carDM = await _carServices.GetAllCars(
                 SearchCarModel,
                 SearchLocation).ToListAsync();
-            IEnumerable<CarViewModel> carVM = new List<CarViewModel>();
-            AutoMapper.Mapper.Map(carDM, carVM);
-            return View(carVM);
+                IEnumerable<CarViewModel> carVM = new List<CarViewModel>();
+                AutoMapper.Mapper.Map(carDM, carVM);
+                return View(carVM);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
         }
 
         // GET: Cars/Details/5
@@ -34,14 +41,15 @@ namespace CarRentalMS.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFound", "Error");
             }
             var carDM = await _carServices.FindCar(id);
             CarViewModel carVM = new CarViewModel();
             AutoMapper.Mapper.Map(carDM, carVM);
             if (carVM == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Error");
             }
             return View(carVM);
         }
@@ -76,14 +84,14 @@ namespace CarRentalMS.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFound", "Error");
             }
             Car carDM = await _carServices.FindCar(id);
             CarViewModel carVM = new CarViewModel();
             AutoMapper.Mapper.Map(carDM, carVM);
             if (carVM == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Error");
             }
             return View(carVM);
         }
@@ -110,14 +118,14 @@ namespace CarRentalMS.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NotFound", "Error");
             }
             Car carDM = await _carServices.FindCar(id);
             CarViewModel carVM = new CarViewModel();
             AutoMapper.Mapper.Map(carDM, carVM);
             if (carVM == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Error");
             }
             return View(carVM);
         }

@@ -43,7 +43,10 @@ namespace CarRentalMS.Services
 
         public virtual async Task<Car> FindCar(int? id)
         {
-            return await _carRepository.FindById(id);
+            var car = await _carRepository.FindById(id);
+            if (car.CarModel == null)
+                return null;
+            return car;
         }
 
         public async Task UpdateCar(Car car)
