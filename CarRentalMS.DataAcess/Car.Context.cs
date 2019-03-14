@@ -28,6 +28,6 @@ namespace CarRentalMS.DataAccess
         public virtual DbSet<UserAccount> UserAccounts { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
-        public virtual DbSet<CarBrand> CarBrands { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
     }
 }

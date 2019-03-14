@@ -18,8 +18,8 @@ namespace CarRentalMS.DataAccess
         public string CarModel { get; set; }
         public string Location { get; set; }
         public double PricePerDay { get; set; }
-        public Nullable<int> BrandId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
     
-        public virtual CarBrand CarBrand { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

@@ -12,16 +12,16 @@ namespace CarRentalMS.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class CarBrand
+    public partial class Company
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CarBrand()
+        public Company()
         {
             this.Cars = new HashSet<Car>();
         }
     
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
+        public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Cars { get; set; }

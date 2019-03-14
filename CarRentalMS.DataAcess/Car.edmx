@@ -13,14 +13,14 @@
           <Property Name="CarModel" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Location" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="PricePerDay" Type="float8" Nullable="false" />
-          <Property Name="BrandId" Type="int4" />
+          <Property Name="CompanyId" Type="int4" />
         </EntityType>
-        <EntityType Name="CarBrand">
+        <EntityType Name="Company">
           <Key>
-            <PropertyRef Name="BrandId" />
+            <PropertyRef Name="CompanyId" />
           </Key>
-          <Property Name="BrandId" Type="int4" Nullable="false" />
-          <Property Name="BrandName" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="CompanyId" Type="int4" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="8000" Nullable="false" />
         </EntityType>
         <EntityType Name="UserAccount">
           <Key>
@@ -39,15 +39,15 @@
           <Property Name="UserRoleID" Type="int4" Nullable="false" />
           <Property Name="Role" Type="text" Nullable="false" />
         </EntityType>
-        <Association Name="brandId_fk">
-          <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="0..1" />
+        <Association Name="companyId_fk">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CarBrand">
-              <PropertyRef Name="BrandId" />
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="Car">
-              <PropertyRef Name="BrandId" />
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -65,11 +65,11 @@
         </Association>
         <EntityContainer Name="AWS_POSTGREQL_TRIALModelStoreContainer">
           <EntitySet Name="Car" EntityType="Self.Car" Schema="public" store:Type="Tables" />
-          <EntitySet Name="CarBrand" EntityType="Self.CarBrand" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="public" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="public" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="public" store:Type="Tables" />
-          <AssociationSet Name="brandId_fk" Association="Self.brandId_fk">
-            <End Role="CarBrand" EntitySet="CarBrand" />
+          <AssociationSet Name="companyId_fk" Association="Self.companyId_fk">
+            <End Role="Company" EntitySet="Company" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
           <AssociationSet Name="User_ACC_FK" Association="Self.User_ACC_FK">
@@ -89,12 +89,12 @@
             <End Role="UserAccount" EntitySet="UserAccounts" />
           </AssociationSet>
           <EntitySet Name="Cars" EntityType="AWS_POSTGREQL_TRIALModel.Car" />
-          <EntitySet Name="CarBrands" EntityType="AWS_POSTGREQL_TRIALModel.CarBrand" />
-          <AssociationSet Name="brandId_fk" Association="AWS_POSTGREQL_TRIALModel.brandId_fk">
-            <End Role="CarBrand" EntitySet="CarBrands" />
+          <EntitySet Name="Companies" EntityType="AWS_POSTGREQL_TRIALModel.Company" />
+          <AssociationSet Name="companyId_fk" Association="AWS_POSTGREQL_TRIALModel.companyId_fk">
+            <End Role="Company" EntitySet="Companies" />
             <End Role="Car" EntitySet="Cars" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="UserAccount">
           <Key>
             <PropertyRef Name="UserID" />
@@ -134,30 +134,30 @@
           <Property Name="CarModel" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Location" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PricePerDay" Type="Double" Nullable="false" />
-          <Property Name="BrandId" Type="Int32" />
-          <NavigationProperty Name="CarBrand" Relationship="AWS_POSTGREQL_TRIALModel.brandId_fk" FromRole="Car" ToRole="CarBrand" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="AWS_POSTGREQL_TRIALModel.companyId_fk" FromRole="Car" ToRole="Company" />
         </EntityType>
-        <EntityType Name="CarBrand">
+        <EntityType Name="Company">
           <Key>
-            <PropertyRef Name="BrandId" />
+            <PropertyRef Name="CompanyId" />
           </Key>
-          <Property Name="BrandId" Type="Int32" Nullable="false" />
-          <Property Name="BrandName" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cars" Relationship="AWS_POSTGREQL_TRIALModel.brandId_fk" FromRole="CarBrand" ToRole="Car" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cars" Relationship="AWS_POSTGREQL_TRIALModel.companyId_fk" FromRole="Company" ToRole="Car" />
         </EntityType>
-        <Association Name="brandId_fk">
-          <End Type="AWS_POSTGREQL_TRIALModel.CarBrand" Role="CarBrand" Multiplicity="0..1" />
+        <Association Name="companyId_fk">
+          <End Type="AWS_POSTGREQL_TRIALModel.Company" Role="Company" Multiplicity="0..1" />
           <End Type="AWS_POSTGREQL_TRIALModel.Car" Role="Car" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CarBrand">
-              <PropertyRef Name="BrandId" />
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="Car">
-              <PropertyRef Name="BrandId" />
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -185,7 +185,7 @@
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.Car">
               <MappingFragment StoreEntitySet="Car">
-                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="PricePerDay" ColumnName="PricePerDay" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="CarModel" ColumnName="CarModel" />
@@ -193,15 +193,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CarBrands">
-            <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.CarBrand">
-              <MappingFragment StoreEntitySet="CarBrand">
-                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
-                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
