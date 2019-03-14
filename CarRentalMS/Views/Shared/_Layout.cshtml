@@ -15,6 +15,10 @@
     <script src="~/Scripts/DataTable/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/DataTable/dataTables.bootstrap4.min.js "></script>
 
+    @* Toastr *@
+    <script src="~/Scripts/toastr.js"></script>
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+
     @* Font Awesome Icons *@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" 
@@ -30,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item active loading" @*id="loading"*@>@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item active loading">@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
             <div class="dropdown-divider"></div>
@@ -42,10 +46,6 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a href="@Url.Action("Logout", "Account")" data-toggle="tooltip" data-placement="top" title="Edit" class="nav-link text-dark"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-                        @*<a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>*@
                     </div>
                 }
                 else
@@ -55,6 +55,14 @@
             </div>
         </div>
     </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Car Rental</p>
+        </footer>
+    </div>
 
     <!-- Loading Modal -->
     <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -70,16 +78,7 @@
         </div>
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Car Rental</p>
-        </footer>
-    </div>
-
     <script>
-
         $(".loading").click(function () {
             $("#exampleModal").modal("show");
             $.ajax({
@@ -88,16 +87,20 @@
                 }
             })
         });
-
-        //$("#loading2").click(function () {
-        //    $("#exampleModal").modal("show");
-        //    $.ajax({
-        //        success: function () {
-        //            $("#exampleModal").modal("hide");
-        //        }
-        //    })
-        //});
     </script>
+
+    @if (TempData["msgSuccess"] != null)
+    {
+        <script>
+            toastr.options = {
+                "timeOut": "3000",
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+            }
+            toastr.success("@TempData["msgSuccess"]" + " successfully.");
+        </script>
+
+    }
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

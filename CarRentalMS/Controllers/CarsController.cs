@@ -73,6 +73,7 @@ namespace CarRentalMS.Controllers
                 Car carDM = new Car();
                 AutoMapper.Mapper.Map(carVM, carDM);
                 await _carServices.AddCar(carDM);
+                TempData["msgSuccess"] = "Car added";
                 return RedirectToAction("Index");
             }
 
@@ -108,6 +109,7 @@ namespace CarRentalMS.Controllers
                 Car carDM = new Car();
                 AutoMapper.Mapper.Map(carVM, carDM);
                 await _carServices.UpdateCar(carDM);
+                TempData["msgSuccess"] = "Car edited";
                 return RedirectToAction("Index");
             }
             return View(carVM);
@@ -139,6 +141,7 @@ namespace CarRentalMS.Controllers
         {
             Car car = await _carServices.FindCar(id);
             await _carServices.DeleteCar(car);
+            TempData["msgSuccess"] = "Car deleted";
             return RedirectToAction("Index");
         }
     }
