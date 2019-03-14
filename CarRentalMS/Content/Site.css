@@ -72,3 +72,7 @@ tfoot input {
 .car-table{
     margin-top: 8px;
 }
+
+.table th, .table td {
+    padding: 0.5rem;
+}
