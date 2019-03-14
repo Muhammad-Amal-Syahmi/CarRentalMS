@@ -51,7 +51,12 @@ namespace CarRentalMS.Controllers
         // GET: Company/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var company = db.Companies.Find(id);
+            if (company == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return View(company);
         }
 
         // POST: Company/Edit/5
@@ -73,7 +78,12 @@ namespace CarRentalMS.Controllers
         // GET: Company/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var company = db.Companies.Find(id);
+            if (company == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return View(company);
         }
 
         // POST: Company/Delete/5

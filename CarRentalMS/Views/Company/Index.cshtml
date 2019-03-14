@@ -5,36 +5,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Company List</h2>
+<h2 class="page-title">Car Rental Companies</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyEmail)
-        </th>
-        <th></th>
-    </tr>
+<div class="container search-form">
+    <div class="row ">
+        @*@using (Html.BeginForm("Index", "Cars", FormMethod.Get))
+        {
+            <div class="form-inline">
+                <div class="form-group">
+                    @Html.TextBox("SearchLocation", null, new { @class = "form-control", @placeholder = "Pickup Location" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBox("SearchCarModel", null, new { @class = "form-control", @placeholder = "Car Model" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-info form-control btn-search-car loading" />
+                </div>
+            </div>
+        }*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyEmail)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CompanyId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.CompanyId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId })
-        </td>
-    </tr>
-}
+        <div class="ml-auto" style="font-size:2em;">
+            <a href="@Url.Action("Create","Company")" data-toggle="tooltip" data-placement="top" title="Add New Company"><i class="fas fa-plus-circle text-success loading"></i></a>
+        </div>
+    </div>
+</div>
 
-</table>
+<div class="car-table">
+    <table id="table_id" class="table table-hover table-bordered table-striped table-car">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyEmail)
+                </th>
+                <th>
+                    @Html.DisplayName("Options")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyEmail)
+                    </td>
+                    <td style="width: 10%">
+                        <span style="font-size: 1.5em;">
+                            <a href="@Url.Action("Edit", new { id = item.CompanyId})" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
+                            <a href="@Url.Action("Details", new { id = item.CompanyId})" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
+                            <a href="@Url.Action("Delete", new { id = item.CompanyId})" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fas fa-trash-alt text-danger"></i></a>
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+
+    $('#table_id').dataTable({
+        "lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
+    });
+
+</script>
