@@ -22,6 +22,7 @@ namespace CarRentalMS.DataAccess
     
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
+        public string CompanyEmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Cars { get; set; }

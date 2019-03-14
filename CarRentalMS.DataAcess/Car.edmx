@@ -20,7 +20,8 @@
             <PropertyRef Name="CompanyId" />
           </Key>
           <Property Name="CompanyId" Type="int4" Nullable="false" />
-          <Property Name="CompanyName" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyEmail" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="UserAccount">
           <Key>
@@ -144,6 +145,7 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cars" Relationship="AWS_POSTGREQL_TRIALModel.companyId_fk" FromRole="Company" ToRole="Car" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="companyId_fk">
           <End Type="AWS_POSTGREQL_TRIALModel.Company" Role="Company" Multiplicity="0..1" />
@@ -196,6 +198,7 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>

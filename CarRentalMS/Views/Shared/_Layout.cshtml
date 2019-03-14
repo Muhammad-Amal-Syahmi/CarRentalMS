@@ -35,6 +35,10 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active loading">@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item active loading">@Html.ActionLink("Companies", "Index", "Company", new { area = "" }, new { @class = "nav-link" })</li>
+                }
                 <li class="nav-item active">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
             <div class="dropdown-divider"></div>
