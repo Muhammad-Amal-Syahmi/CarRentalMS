@@ -85,6 +85,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Car.tt</DependentUpon>
     </Compile>
+    <Compile Include="CarBrand.cs">
+      <DependentUpon>Car.tt</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\GenericRepository.cs" />
     <Compile Include="Infrastructure\Interfaces\IDbFactory.cs" />

@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item active">@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item active loading" @*id="loading"*@>@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
             <div class="dropdown-divider"></div>
@@ -43,9 +43,9 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a href="@Url.Action("Logout", "Account")" data-toggle="tooltip" data-placement="top" title="Edit" class="nav-link text-dark"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                         @*<a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>*@
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>*@
                     </div>
                 }
                 else
@@ -56,6 +56,20 @@
         </div>
     </nav>
 
+    <!-- Loading Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div style="text-align:center;">
+                        <img src="~/Content/Images/CarSpinning.gif" />
+                        <p>Loading... Please Wait.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -63,6 +77,27 @@
             <p>&copy; @DateTime.Now.Year - Car Rental</p>
         </footer>
     </div>
+
+    <script>
+
+        $(".loading").click(function () {
+            $("#exampleModal").modal("show");
+            $.ajax({
+                success: function () {
+                    $("#exampleModal").modal("hide");
+                }
+            })
+        });
+
+        //$("#loading2").click(function () {
+        //    $("#exampleModal").modal("show");
+        //    $.ajax({
+        //        success: function () {
+        //            $("#exampleModal").modal("hide");
+        //        }
+        //    })
+        //});
+    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -20,14 +20,14 @@
                     @Html.TextBox("SearchCarModel", null, new { @class = "form-control", @placeholder = "Car Model" })
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Search" class="btn btn-info form-control btn-search-car" />
+                    <input type="submit" value="Search" class="btn btn-info form-control btn-search-car loading" />
                 </div>
             </div>
         }
         @if (User.IsInRole("Admin"))
         {
             <div class="ml-auto" style="font-size:2em;">
-                <a href="@Url.Action("Create","Cars")" data-toggle="tooltip" data-placement="top" title="Add New Car"><i class="fas fa-plus-circle text-success"></i></a>
+                <a href="@Url.Action("Create","Cars")" data-toggle="tooltip" data-placement="top" title="Add New Car"><i class="fas fa-plus-circle text-success loading"></i></a>
             </div>
         }
 
@@ -111,7 +111,15 @@
 <script>
 
     $('#table_id').dataTable({
-        "lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]]
+        "lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
+        //"ajax": {
+        //    "url": "/Cars/GetList",
+        //    "type": "POST",
+        //    "datatype": "json"
+        //},
+        //"columns": [
+        //    {"data": "Id", "id" : "Id"}
+        //]
     });
 
 </script>

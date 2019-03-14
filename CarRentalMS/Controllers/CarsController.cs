@@ -29,6 +29,7 @@ namespace CarRentalMS.Controllers
                 IEnumerable<CarViewModel> carVM = new List<CarViewModel>();
                 AutoMapper.Mapper.Map(carDM, carVM);
                 return View(carVM);
+                //return Json(new { data = carVM }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {

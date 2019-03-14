@@ -25,8 +25,9 @@ namespace CarRentalMS.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<CarBrand> CarBrands { get; set; }
     }
 }
