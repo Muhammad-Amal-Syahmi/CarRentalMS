@@ -1,15 +1,12 @@
-﻿@*@model CarRentalMS.DataAccess.Car*@
-@model CarRentalMS.ViewModels.CarViewModel
+﻿@model CarRentalMS.ViewModels.CarViewModel
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2 class="page-title">Details of Car @Model.Id</h2>
-
 <div>
-    <hr />
+    @Html.HiddenFor(model => model.Id)
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CarModel)
@@ -47,7 +44,12 @@
         //book now
         <a href="#" class="btn btn-primary btn-inside-options">Book Now</a>
     }
-
-    @*@Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "btn btn-outline-info btn-inside-options btn-back-list" })*@
-    <a href='javascript:history.go(-1)' class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
+    <a onclick="BackToList()" class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
 </p>
+
+<script>
+    var BackToList = function () {
+        $("#myModal").modal("hide");
+    }
+</script>
+

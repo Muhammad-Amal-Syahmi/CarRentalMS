@@ -52,7 +52,8 @@ namespace CarRentalMS.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View(carVM);
+            return PartialView("Details", carVM);
+
         }
 
         // GET: Cars/Create
