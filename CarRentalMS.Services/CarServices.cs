@@ -70,5 +70,10 @@ namespace CarRentalMS.Services
             var maxId = await _carRepository.GetMaxId();
             return ++maxId;
         }
+
+        public DateTime? GetCurrentDate()
+        {
+            return DateTime.Now;
+        }
     }
 }

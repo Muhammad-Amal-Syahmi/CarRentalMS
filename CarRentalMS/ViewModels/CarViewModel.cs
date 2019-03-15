@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarRentalMS.ViewModels
 {
@@ -20,5 +21,10 @@ namespace CarRentalMS.ViewModels
         [DataType(DataType.Currency)]
         [Range(0.01, 999999999, ErrorMessage = "Price must be greater than 0.00")]
         public double? PricePerDay { get; set; }
+
+        [Display(Name = "Date Modified")]
+        public DateTime? LastModifiedDate { get; set; }
+
+
     }
 }

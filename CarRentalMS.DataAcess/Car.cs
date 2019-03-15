@@ -19,6 +19,7 @@ namespace CarRentalMS.DataAccess
         public string Location { get; set; }
         public double PricePerDay { get; set; }
         public Nullable<int> CompanyId { get; set; }
+        public Nullable<System.DateTime> LastModifiedDate { get; set; }
     
         public virtual Company Company { get; set; }
     }

@@ -69,15 +69,16 @@ namespace CarRentalMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] CarViewModel carVM)
         {
+            carVM.LastModifiedDate = _carServices.GetCurrentDate();
             if (ModelState.IsValid)
             {
                 Car carDM = new Car();
                 AutoMapper.Mapper.Map(carVM, carDM);
                 await _carServices.AddCar(carDM);
-                TempData["msgSuccess"] = "Car added";
+                TempData["msgSuccess"] = "Car Added";
                 return RedirectToAction("Index");
             }
-
+            TempData["msgFailed"] = "Add Car";
             return View(carVM);
         }
 
@@ -110,7 +111,7 @@ namespace CarRentalMS.Controllers
                 Car carDM = new Car();
                 AutoMapper.Mapper.Map(carVM, carDM);
                 await _carServices.UpdateCar(carDM);
-                TempData["msgSuccess"] = "Car edited";
+                TempData["msgSuccess"] = "Car Edited";
                 return RedirectToAction("Index");
             }
             return View(carVM);
@@ -142,7 +143,7 @@ namespace CarRentalMS.Controllers
         {
             Car car = await _carServices.FindCar(id);
             await _carServices.DeleteCar(car);
-            TempData["msgSuccess"] = "Car deleted";
+            TempData["msgSuccess"] = "Car Deleted";
             return RedirectToAction("Index");
         }
     }

@@ -14,6 +14,7 @@
           <Property Name="Location" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="PricePerDay" Type="float8" Nullable="false" />
           <Property Name="CompanyId" Type="int4" />
+          <Property Name="LastModifiedDate" Type="timestamp" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -137,6 +138,7 @@
           <Property Name="PricePerDay" Type="Double" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="AWS_POSTGREQL_TRIALModel.companyId_fk" FromRole="Car" ToRole="Company" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="6" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -187,6 +189,7 @@
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.Car">
               <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="PricePerDay" ColumnName="PricePerDay" />
                 <ScalarProperty Name="Location" ColumnName="Location" />

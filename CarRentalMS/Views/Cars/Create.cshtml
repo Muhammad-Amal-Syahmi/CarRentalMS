@@ -13,39 +13,40 @@
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.CarModel, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CarModel, new { htmlAttributes = new { @class = "form-control", @placeholder ="e.g Perodua Viva" } })
-            @Html.ValidationMessageFor(model => model.CarModel, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarModel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CarModel, new { htmlAttributes = new { @class = "form-control", @placeholder ="e.g Perodua Viva" } })
+                @Html.ValidationMessageFor(model => model.CarModel, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "e.g Gelugor" } })
-            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "e.g Gelugor" } })
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PricePerDay, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PricePerDay, new { htmlAttributes = new { @class = "form-control", @placeholder = "e.g 85.00" } })
-            @Html.ValidationMessageFor(model => model.PricePerDay, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PricePerDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PricePerDay, new { htmlAttributes = new { @class = "form-control", @placeholder = "e.g 85.00" } })
+                @Html.ValidationMessageFor(model => model.PricePerDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-success btn-inside-options toastSuccess" />
+                @Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "btn btn-outline-info btn-inside-options btn-back-list" })
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Create" class="btn btn-success btn-inside-options toastSuccess" />
-            @Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "btn btn-outline-info btn-inside-options btn-back-list" })
-        </div>
-    </div>
-</div>
 }
 
 @section Scripts {

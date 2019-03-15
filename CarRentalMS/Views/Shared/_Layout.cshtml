@@ -98,13 +98,48 @@
     {
         <script>
             toastr.options = {
-                "timeOut": "3000",
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
                 "progressBar": true,
                 "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
             }
-            toastr.success("@TempData["msgSuccess"]" + " successfully.");
+            toastr.success("@TempData["msgSuccess"]" + " Successfully!");
         </script>
+    }
 
+    @if (TempData["msgFailed"] != null)
+    {
+        <script>
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            toastr.error("Fail to "+"@TempData["msgFailed"]"+"!");
+        </script>
     }
 
     @Scripts.Render("~/bundles/jquery")

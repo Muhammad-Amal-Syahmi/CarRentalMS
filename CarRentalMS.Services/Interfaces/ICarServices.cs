@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CarRentalMS.DataAccess;
 
@@ -11,5 +12,6 @@ namespace CarRentalMS.Services.Interfaces
         Task UpdateCar(Car car);
         Task DeleteCar(Car car);
         Task<Car> FindCar(int? id);
+        DateTime? GetCurrentDate();
     }
 }
