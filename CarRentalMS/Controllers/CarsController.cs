@@ -106,6 +106,7 @@ namespace CarRentalMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,CarModel,Location,PricePerDay")] CarViewModel carVM)
         {
+            carVM.LastModifiedDate = _carServices.GetCurrentDate();
             if (ModelState.IsValid)
             {
                 Car carDM = new Car();
