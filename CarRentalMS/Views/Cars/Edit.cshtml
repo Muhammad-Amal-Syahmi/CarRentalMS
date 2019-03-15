@@ -2,11 +2,11 @@
 @model CarRentalMS.ViewModels.CarViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Car";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="page-title">Edit Car @Model.Id</h2>
+<h2 class="page-title">@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm())

@@ -130,7 +130,7 @@ namespace CarRentalMS.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View(carVM);
+            return PartialView("Delete", carVM);
         }
 
         // POST: Cars/Delete/5

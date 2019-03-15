@@ -68,44 +68,60 @@
             </tr>
         </thead>
         <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td style="width: 7%">
-                            @Html.DisplayFor(modelItem => item.Id)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 7%">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarModel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td style="width: 10%">
+                            <span style="font-size: 1.5em;">
+                                <a href="@Url.Action("Edit", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
+                                <a class="btn-options" onclick="DeleteCar(@item.Id)" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt text-danger"></i></a>
+                            </span>
                         </td>
+                    }
+                    else
+                    {
                         <td>
-                            @Html.DisplayFor(modelItem => item.CarModel)
+                            @Html.DisplayFor(modelItem => item.PricePerDay)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Location)
+                        <td style="width:8%; text-align:center;">
+                            <span style="font-size: 1.5em; ">
+                                <a href="@Url.Action("Details", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
+                            </span>
                         </td>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <td style="width: 10%">
-                                <span style="font-size: 1.5em;">
-                                    <a href="@Url.Action("Edit", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
-                                    <a href="@Url.Action("Details", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
-                                    <a href="@Url.Action("Delete", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fas fa-trash-alt text-danger"></i></a>
-                                </span>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PricePerDay)
-                            </td>
-                            <td style="width:8%; text-align:center;">
-                                <span style="font-size: 1.5em; ">
-                                    <a href="@Url.Action("Details", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
-                                </span>
-                            </td>
-                        }
+                    }
 
-                    </tr>
-                }
+                </tr>
+            }
         </tbody>
     </table>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-title" class="modal-title text-dark">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="myModalBodyDiv">
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -120,6 +136,14 @@
         //"columns": [
         //    {"data": "Id", "id" : "Id"}
         //]
+
     });
+    var DeleteCar = function (carId) {
+        document.getElementById('modal-title').innerHTML = "Delete Car";
+        var url = "Cars/Delete/" + carId;
+        $("#myModalBodyDiv").load(url, function () {
+            $("#myModal").modal();
+        })
+    }
 
 </script>

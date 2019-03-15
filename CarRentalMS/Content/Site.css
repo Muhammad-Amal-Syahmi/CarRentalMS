@@ -38,8 +38,11 @@ thead th{
     color: #fff;
 }
 
-.btn-options{
-    width: 70px;
+.btn-options {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .btn-inside-options{
@@ -71,8 +74,4 @@ tfoot input {
 .search-form,
 .car-table{
     margin-top: 8px;
-}
-
-.table th, .table td {
-    padding: 0.5rem;
 }
