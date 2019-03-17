@@ -1,7 +1,6 @@
-﻿using System;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using CarRentalMS.DataAccess;
 using CarRentalMS.DataAccess.Infrastructure;
 using CarRentalMS.DataAccess.Infrastructure.Interfaces;
 using CarRentalMS.DataAccess.Repositories.Interfaces;
@@ -22,9 +21,9 @@ namespace CarRentalMS.DataAccess.Repositories
                 .AsQueryable();
         }
 
-        public Task<int> GetMaxId()
+        public async Task<int> GetMaxId()
         {
-            throw new NotImplementedException();
+            return await DbContext.Companies.MaxAsync(c => c.CompanyId);
         }
     }
 }

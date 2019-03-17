@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CarRentalMS.DataAccess;
@@ -22,12 +21,6 @@ namespace CarRentalMS.Controllers
             _companyServices = companyServices;
         }
 
-        //public ActionResult Index()
-        //{
-        //    var companies = db.Companies.ToList();
-        //    return View(companies);
-        //}
-
         // GET: Company
         public async Task<ActionResult> Index(string SearchCompanyName)
         {
@@ -38,8 +31,6 @@ namespace CarRentalMS.Controllers
                 IEnumerable<CompanyViewModel> companyVM = new List<CompanyViewModel>();
                 AutoMapper.Mapper.Map(companyDM, companyVM);
                 return View(companyVM);
-
-                //return Json(new { data = carVM }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -66,18 +57,34 @@ namespace CarRentalMS.Controllers
 
         // POST: Company/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create([Bind(Include = "CompanyName,CompanyEmail")] CompanyViewModel companyVM, bool AddAnotherCheckbox)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            //try
+            //{
+            //    // TODO: Add insert logic here
 
+            //    return RedirectToAction("Index");
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
+
+            //carVM.LastModifiedDate = _carServices.GetCurrentDate();
+            if (ModelState.IsValid)
+            {
+                Company companyDM = new Company();
+                AutoMapper.Mapper.Map(companyVM, companyDM);
+                await _companyServices.AddCompany(companyDM);
+                TempData["msgSuccess"] = "Company Added";
+                if (AddAnotherCheckbox == true)
+                {
+                    return RedirectToAction("Create");
+                }
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            TempData["msgFailed"] = "Add Company";
+            return View(companyVM);
         }
 
         // GET: Company/Edit/5

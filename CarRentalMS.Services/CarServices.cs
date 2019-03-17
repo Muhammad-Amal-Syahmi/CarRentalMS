@@ -49,7 +49,7 @@ namespace CarRentalMS.Services
             return car;
         }
 
-        public async Task UpdateCar(Car car)
+        public virtual async Task UpdateCar(Car car)
         {
             if (car == null)
                 throw new ArgumentNullException("updateCar");
@@ -57,7 +57,7 @@ namespace CarRentalMS.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task DeleteCar(Car car)
+        public virtual async Task DeleteCar(Car car)
         {
             if (car == null)
                 throw new ArgumentNullException("deleteCar");
@@ -71,7 +71,7 @@ namespace CarRentalMS.Services
             return ++maxId;
         }
 
-        public DateTime? GetCurrentDate()
+        public virtual DateTime? GetCurrentDate()
         {
             return DateTime.Now;
         }

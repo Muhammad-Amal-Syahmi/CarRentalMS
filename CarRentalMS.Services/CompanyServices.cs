@@ -29,12 +29,18 @@ namespace CarRentalMS.Services
             return _companyRepository.GetAll();
         }
 
-        public Task AddCompany(Company car)
+        public virtual async Task AddCompany(Company company)
         {
-            throw new NotImplementedException();
+            if (company == null)
+            {
+                throw new ArgumentNullException("addCompany");
+            }
+            company.CompanyId = await GetNewId();
+            _companyRepository.Create(company);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task DeleteCompany(Company car)
+        public Task DeleteCompany(Company company)
         {
             throw new NotImplementedException();
         }
@@ -49,9 +55,15 @@ namespace CarRentalMS.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateCompany(Company car)
+        public Task UpdateCompany(Company company)
         {
             throw new NotImplementedException();
+        }
+
+        private async Task<int> GetNewId()
+        {
+            var maxId = await _companyRepository.GetMaxId();
+            return ++maxId;
         }
     }
 }
