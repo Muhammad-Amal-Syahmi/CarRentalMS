@@ -37,7 +37,7 @@
 <p>
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning btn-inside-options" })
+        <a class="btn btn-warning btn-inside-options" onclick="GoEditCar(@Model.Id)">Edit</a>
     }
     else
     {
@@ -50,6 +50,20 @@
 <script>
     var BackToList = function () {
         $("#myModal").modal("hide");
+    }
+
+    var GoEditCar = function (carId) {
+        $("#myModal").modal("hide");
+        document.getElementById('modal-title').innerHTML = "Edit Car";
+        var url = "Cars/Edit/" + carId;
+        var delayInMilliseconds = 500; //0.5 second
+
+        setTimeout(function () {
+            $("#myModalBodyDiv").load(url, function () {
+                $("#myModal").modal();
+            })
+        }, delayInMilliseconds);
+        
     }
 </script>
 
