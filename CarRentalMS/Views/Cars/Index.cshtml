@@ -39,8 +39,8 @@
         <thead>
             <tr>
                 @*<th>
-            @Html.DisplayName("Id")
-        </th>*@
+                    @Html.DisplayName("Id")
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.CarModel)
                 </th>
@@ -88,7 +88,7 @@
                         </td>
                         <td>
                             <span style="font-size: 1.5em;">
-                                <a href="@Url.Action("Edit", new { id = item.Id})" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
+                                <a class="btn-options" onclick="EditCar(@item.Id)" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
                                 <a class="btn-options" onclick="CarDetails(@item.Id)" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
                                 <a class="btn-options" onclick="DeleteCar(@item.Id)" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt text-danger"></i></a>
                             </span>
@@ -155,6 +155,14 @@
     var CarDetails = function (carId) {
         document.getElementById('modal-title').innerHTML = "Car Details";
         var url = "Cars/Details/" + carId;
+        $("#myModalBodyDiv").load(url, function () {
+            $("#myModal").modal();
+        })
+    }
+
+    var EditCar = function (carId) {
+        document.getElementById('modal-title').innerHTML = "Edit Car";
+        var url = "Cars/Edit/" + carId;
         $("#myModalBodyDiv").load(url, function () {
             $("#myModal").modal();
         })
