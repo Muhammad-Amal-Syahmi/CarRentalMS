@@ -67,7 +67,7 @@ namespace CarRentalMS.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] CarViewModel carVM)
+        public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] CarViewModel carVM, bool AddAnotherCheckbox)
         {
             carVM.LastModifiedDate = _carServices.GetCurrentDate();
             if (ModelState.IsValid)
@@ -76,6 +76,10 @@ namespace CarRentalMS.Controllers
                 AutoMapper.Mapper.Map(carVM, carDM);
                 await _carServices.AddCar(carDM);
                 TempData["msgSuccess"] = "Car Added";
+                if(AddAnotherCheckbox == true)
+                {
+                    return RedirectToAction("Create");
+                }
                 return RedirectToAction("Index");
             }
             TempData["msgFailed"] = "Add Car";

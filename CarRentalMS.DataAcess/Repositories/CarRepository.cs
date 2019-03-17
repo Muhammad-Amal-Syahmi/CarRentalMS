@@ -19,7 +19,7 @@ namespace CarRentalMS.DataAccess.Repositories
                     &&
                     c.Location.ToLower().Contains(location.ToLower())
                 )
-                .OrderBy(c => c.Id)
+                .OrderByDescending(c => c.LastModifiedDate)
                 .AsQueryable();
         }
 
