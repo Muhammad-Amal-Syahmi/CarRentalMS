@@ -1,19 +1,14 @@
 ﻿@model CarRentalMS.DataAccess.Company
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-
-<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Company</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.CompanyId)
 
@@ -34,13 +29,16 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary btn-inside-options" />
+                <a onclick="BackToList()" class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    var BackToList = function () {
+        $("#myModal").modal("hide");
+    }
+</script>

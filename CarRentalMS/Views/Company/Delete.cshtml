@@ -1,16 +1,12 @@
 ﻿@model CarRentalMS.DataAccess.Company
 
 @{
-    ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Company</h4>
-    <hr />
+    <h4>Are you sure you want to delete this?</h4>
+    <br />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CompanyName)
@@ -30,12 +26,22 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-group text-right">
+            <div>
+                <input type="submit" value="Delete" class="btn btn-danger btn-inside-options" />
+                <a onclick="BackToList()" class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
+            </div>
         </div>
     }
+
 </div>
+
+<script>
+    var BackToList = function () {
+        $("#myModal").modal("hide");
+    }
+</script>

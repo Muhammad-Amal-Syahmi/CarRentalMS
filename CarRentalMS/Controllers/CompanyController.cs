@@ -23,7 +23,7 @@ namespace CarRentalMS.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View(company);
+            return PartialView(company);
         }
 
         // GET: Company/Create
@@ -56,7 +56,7 @@ namespace CarRentalMS.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View(company);
+            return PartialView(company);
         }
 
         // POST: Company/Edit/5
@@ -83,7 +83,7 @@ namespace CarRentalMS.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View(company);
+            return PartialView(company);
         }
 
         // POST: Company/Delete/5

@@ -1,15 +1,12 @@
 ﻿@model CarRentalMS.DataAccess.Company
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Company</h4>
-    <hr />
+    @Html.HiddenFor(model => model.CompanyId)
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CompanyName)
@@ -26,10 +23,38 @@
         <dd>
             @Html.DisplayFor(model => model.CompanyEmail)
         </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-warning btn-inside-options" onclick="GoEditCompany(@Model.CompanyId)">Edit</a>
+    }
+    else
+    {
+        //book now
+        <a href="#" class="btn btn-primary btn-inside-options">Book Now</a>
+    }
+    <a onclick="BackToList()" class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
 </p>
+
+<script>
+    var BackToList = function () {
+        $("#myModal").modal("hide");
+    }
+
+    var GoEditCompany = function (companyId) {
+        $("#myModal").modal("hide");
+        document.getElementById('modal-title').innerHTML = "Edit Company";
+        var url = "Company/Edit/" + companyId;
+        var delayInMilliseconds = 500; //0.5 second
+
+        setTimeout(function () {
+            $("#myModalBodyDiv").load(url, function () {
+                $("#myModal").modal();
+            })
+        }, delayInMilliseconds);
+
+    }
+</script>
+
