@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarServices.cs" />
+    <Compile Include="CompanyServices.cs" />
     <Compile Include="Interfaces\ICarServices.cs" />
+    <Compile Include="Interfaces\ICompanyServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleProviderServices.cs" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using CarRentalMS.DataAccess;
+using CarRentalMS.Services.Interfaces;
 
 namespace CarRentalMS.Controllers
 {
@@ -8,6 +9,14 @@ namespace CarRentalMS.Controllers
     public class CompanyController : Controller
     {
         AWS_POSTGREQL_TRIALEntities db = new AWS_POSTGREQL_TRIALEntities();
+
+        private readonly ICompanyServices _companyServices;
+
+        public CompanyController(ICompanyServices companyServices)
+        {
+            _companyServices = companyServices;
+        }
+
         // GET: Company
         public ActionResult Index()
         {
