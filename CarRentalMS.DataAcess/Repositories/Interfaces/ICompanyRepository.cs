@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CarRentalMS.DataAccess;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
 
-namespace CarRentalMS.DataAcess.Repositories.Interfaces
+namespace CarRentalMS.DataAccess.Repositories.Interfaces
 {
-    public interface ICompanyRepository
+    public interface ICompanyRepository : IGenericRepository<Company>
     {
-        IQueryable<Company> GetCarsByFilter(string companyName);
+        IQueryable<Company> GetCompaniesByFilter(string companyName);
         Task<int> GetMaxId();
     }
 }

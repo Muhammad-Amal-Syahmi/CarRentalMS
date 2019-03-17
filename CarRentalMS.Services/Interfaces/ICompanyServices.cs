@@ -7,7 +7,7 @@ namespace CarRentalMS.Services.Interfaces
 {
     public interface ICompanyServices
     {
-        IQueryable<Company> GetAllCompanies();
+        IQueryable<Company> GetAllCompanies(string SearchCompanyName);
         Task AddCompany(Company car);
         Task UpdateCompany(Company car);
         Task DeleteCompany(Company car);

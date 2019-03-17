@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarRentalMS.DataAccess.Company>
+﻿@model IEnumerable<CarRentalMS.ViewModels.CompanyViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -9,20 +9,17 @@
 
 <div class="container search-form">
     <div class="row ">
-        @*@using (Html.BeginForm("Index", "Cars", FormMethod.Get))
+        @using (Html.BeginForm("Index", "Company", FormMethod.Get))
         {
             <div class="form-inline">
                 <div class="form-group">
-                    @Html.TextBox("SearchLocation", null, new { @class = "form-control", @placeholder = "Pickup Location" })
-                </div>
-                <div class="form-group">
-                    @Html.TextBox("SearchCarModel", null, new { @class = "form-control", @placeholder = "Car Model" })
+                    @Html.TextBox("SearchCompanyName", null, new { @class = "form-control", @placeholder = "Company Name" })
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Search" class="btn btn-info form-control btn-search-car loading" />
                 </div>
             </div>
-        }*@
+        }
 
         <div class="ml-auto" style="font-size:2em;">
             <a href="@Url.Action("Create","Company")" data-toggle="tooltip" data-placement="top" title="Add New Company"><i class="fas fa-plus-circle text-success loading"></i></a>

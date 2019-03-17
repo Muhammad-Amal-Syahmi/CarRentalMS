@@ -9,6 +9,8 @@ namespace CarRentalMS.Infrastructure
         {
             CreateMap<Car, CarViewModel>();
             CreateMap<CarViewModel, Car>();
+            CreateMap<Company, CompanyViewModel>();
+            CreateMap<CompanyViewModel, Company>();
         }
 
         public static void Run()

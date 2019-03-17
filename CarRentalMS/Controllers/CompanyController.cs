@@ -1,7 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using CarRentalMS.DataAccess;
 using CarRentalMS.Services.Interfaces;
+using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
@@ -17,11 +22,29 @@ namespace CarRentalMS.Controllers
             _companyServices = companyServices;
         }
 
+        //public ActionResult Index()
+        //{
+        //    var companies = db.Companies.ToList();
+        //    return View(companies);
+        //}
+
         // GET: Company
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string SearchCompanyName)
         {
-            var companies = db.Companies.ToList();
-            return View(companies);
+            try
+            {
+                List<Company> companyDM = await _companyServices.GetAllCompanies(
+                    SearchCompanyName).ToListAsync();
+                IEnumerable<CompanyViewModel> companyVM = new List<CompanyViewModel>();
+                AutoMapper.Mapper.Map(companyDM, companyVM);
+                return View(companyVM);
+
+                //return Json(new { data = carVM }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
         }
 
         // GET: Company/Details/5

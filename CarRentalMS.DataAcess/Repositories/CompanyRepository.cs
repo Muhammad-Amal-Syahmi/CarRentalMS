@@ -1,18 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CarRentalMS.DataAccess;
-using CarRentalMS.DataAcess.Repositories.Interfaces;
+using CarRentalMS.DataAccess.Infrastructure;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.DataAccess.Repositories.Interfaces;
 
-namespace CarRentalMS.DataAcess.Repositories
+namespace CarRentalMS.DataAccess.Repositories
 {
-    public class CompanyRepository : ICompanyRepository
+    public class CompanyRepository : GenericRepository<Company>, ICompanyRepository
     {
-        public IQueryable<Company> GetCarsByFilter(string companyName)
+        public CompanyRepository(IDbFactory dbFactory) : base(dbFactory) { }
+
+        public IQueryable<Company> GetCompaniesByFilter(string companyName)
         {
-            throw new NotImplementedException();
+            return DbContext.Set<Company>().
+                Where(c =>
+                    c.CompanyName.ToLower().Contains(companyName.ToLower())
+                )
+                //.OrderByDescending(c => c.LastModifiedDate)
+                .AsQueryable();
         }
 
         public Task<int> GetMaxId()
