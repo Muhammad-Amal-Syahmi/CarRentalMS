@@ -11,7 +11,7 @@ namespace CarRentalMS.Services.Interfaces
         Task AddCompany(Company company);
         Task UpdateCompany(Company company);
         Task DeleteCompany(Company company);
-        Task<Car> FindCompany(int? id);
+        Task<Company> FindCompany(int? id);
         DateTime? GetCurrentDate();
     }
 }

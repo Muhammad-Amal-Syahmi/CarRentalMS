@@ -39,14 +39,20 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Company/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int? id)
         {
-            var company = db.Companies.Find(id);
-            if (company == null)
+            if (id == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return PartialView(company);
+            var companyDM = await _companyServices.FindCompany(id);
+            CompanyViewModel companyVM = new CompanyViewModel();
+            AutoMapper.Mapper.Map(companyDM, companyVM);
+            if (companyVM == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return PartialView("Details", companyVM);
         }
 
         // GET: Company/Create
@@ -59,18 +65,6 @@ namespace CarRentalMS.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([Bind(Include = "CompanyName,CompanyEmail")] CompanyViewModel companyVM, bool AddAnotherCheckbox)
         {
-            //try
-            //{
-            //    // TODO: Add insert logic here
-
-            //    return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
-
-            //carVM.LastModifiedDate = _carServices.GetCurrentDate();
             if (ModelState.IsValid)
             {
                 Company companyDM = new Company();
@@ -88,14 +82,20 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Company/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            var company = db.Companies.Find(id);
-            if (company == null)
+            if (id == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return PartialView(company);
+            var companyDM = await _companyServices.FindCompany(id);
+            CompanyViewModel companyVM = new CompanyViewModel();
+            AutoMapper.Mapper.Map(companyDM, companyVM);
+            if (companyVM == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return PartialView("Edit", companyVM);
         }
 
         // POST: Company/Edit/5
@@ -115,14 +115,20 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Company/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            var company = db.Companies.Find(id);
-            if (company == null)
+            if (id == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return PartialView(company);
+            var companyDM = await _companyServices.FindCompany(id);
+            CompanyViewModel companyVM = new CompanyViewModel();
+            AutoMapper.Mapper.Map(companyDM, companyVM);
+            if (companyVM == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return PartialView("Delete", companyVM);
         }
 
         // POST: Company/Delete/5

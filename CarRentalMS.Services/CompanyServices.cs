@@ -40,14 +40,17 @@ namespace CarRentalMS.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task DeleteCompany(Company company)
+        public virtual async Task DeleteCompany(Company company)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Car> FindCompany(int? id)
+        public virtual async Task<Company> FindCompany(int? id)
         {
-            throw new NotImplementedException();
+            var company = await _companyRepository.FindById(id);
+            if (company.CompanyName == null)
+                return null;
+            return company;
         }
 
         public DateTime? GetCurrentDate()
@@ -55,7 +58,7 @@ namespace CarRentalMS.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateCompany(Company company)
+        public virtual async Task UpdateCompany(Company company)
         {
             throw new NotImplementedException();
         }
