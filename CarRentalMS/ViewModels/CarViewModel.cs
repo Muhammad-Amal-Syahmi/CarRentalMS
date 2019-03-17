@@ -23,6 +23,7 @@ namespace CarRentalMS.ViewModels
         public double? PricePerDay { get; set; }
 
         [Display(Name = "Date Modified")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MMM-dd HH:mm:ss}")]
         public DateTime? LastModifiedDate { get; set; }
 
 
