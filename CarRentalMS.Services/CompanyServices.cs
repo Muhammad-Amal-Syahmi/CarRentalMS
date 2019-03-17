@@ -1,15 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CarRentalMS.DataAccess;
+using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.DataAcess.Repositories.Interfaces;
 using CarRentalMS.Services.Interfaces;
 
 namespace CarRentalMS.Services
 {
     public class CompanyServices : ICompanyServices
     {
+        IUnitOfWork _unitOfWork;
+        ICompanyRepository _companyRepository;
+
+        public CompanyServices(IUnitOfWork unitOfWork, ICompanyRepository companyRepository)
+        {
+            _unitOfWork = unitOfWork;
+            _companyRepository = companyRepository;
+        }
+
         public Task AddCompany(Company car)
         {
             throw new NotImplementedException();
