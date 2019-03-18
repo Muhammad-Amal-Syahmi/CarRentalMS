@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Security;
 using CarRentalMS.DataAccess;
 using CarRentalMS.DataAcess.Repositories.Interfaces;
@@ -19,8 +18,9 @@ namespace CarRentalMS.Services
 
         public bool Login(UserAccount user, bool stayLogin)
         {
+            var passwordHash = GetMD5Hash(user.UserPassword);
             var Acc = _accountRepository.UserLogin(user);
-            if (Acc != null && user.UserPassword == Decrypt(Acc.UserPassword))
+            if (Acc != null && passwordHash == Acc.UserPassword)
             {
                 if (stayLogin == true)
                 {
@@ -48,51 +48,22 @@ namespace CarRentalMS.Services
             }
         }
 
-        // Encryption & Decryption
-        private static readonly UTF8Encoding Encoder = new UTF8Encoding();
-
-        private static string Encrypt(string unencrypted)
+        //Password Hashing
+        private static string GetMD5Hash(string input)
         {
-            if (string.IsNullOrEmpty(unencrypted))
-                return string.Empty;
-
-            try
+            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
             {
-                var encryptedBytes = MachineKey.Protect(Encoder.GetBytes(unencrypted));
+                byte[] b = Encoding.UTF8.GetBytes(input);
+                b = md5.ComputeHash(b);
+                StringBuilder sb = new StringBuilder();
 
-                if (encryptedBytes != null && encryptedBytes.Length > 0)
-                    return HttpServerUtility.UrlTokenEncode(encryptedBytes);
-            }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
-
-            return string.Empty;
-        }
-
-        private static string Decrypt(string encrypted)
-        {
-            if (string.IsNullOrEmpty(encrypted))
-                return string.Empty;
-
-            try
-            {
-                var bytes = HttpServerUtility.UrlTokenDecode(encrypted);
-                if (bytes != null && bytes.Length > 0)
+                foreach (byte x in b)
                 {
-                    var decryptedBytes = MachineKey.Unprotect(bytes);
-                    if (decryptedBytes != null && decryptedBytes.Length > 0)
-                        return Encoder.GetString(decryptedBytes);
+                    sb.Append(x.ToString("x2"));
                 }
-
+                return sb.ToString();
             }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
-
-            return string.Empty;
         }
+
     }
 }

@@ -5,6 +5,7 @@ using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly IAccountServices _accountServices;

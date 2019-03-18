@@ -9,6 +9,7 @@ using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
+    [AllowAnonymous]
     public class CarsController : Controller
     {
         private readonly ICarServices _carServices;
@@ -29,7 +30,6 @@ namespace CarRentalMS.Controllers
                 IEnumerable<CarViewModel> carVM = new List<CarViewModel>();
                 AutoMapper.Mapper.Map(carDM, carVM);
                 return View(carVM);
-                //return Json(new { data = carVM }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -42,7 +42,6 @@ namespace CarRentalMS.Controllers
         {
             if (id == null)
             {
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 return RedirectToAction("NotFound", "Error");
             }
             var carDM = await _carServices.FindCar(id);
