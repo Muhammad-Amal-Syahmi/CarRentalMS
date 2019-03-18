@@ -9,7 +9,7 @@ namespace CarRentalMS.Services.Interfaces
 {
     public interface IAccountServices
     {
-        bool Login(UserAccount user);
+        bool Login(UserAccount user, bool stayLogin);
         bool Logout();
     }
 }

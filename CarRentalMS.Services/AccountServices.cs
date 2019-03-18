@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Security;
@@ -18,11 +17,19 @@ namespace CarRentalMS.Services
             _accountRepository = accountRepository;
         }
 
-        public bool Login(UserAccount user)
+        public bool Login(UserAccount user, bool stayLogin)
         {
             var Acc = _accountRepository.UserLogin(user);
             if (Acc != null && user.UserPassword == Decrypt(Acc.UserPassword))
             {
+                if (stayLogin == true)
+                {
+                    FormsAuthentication.SetAuthCookie(user.UserName, true); //Persistent Cookie
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(user.UserName, false); //Non-Persistent Cookie
+                }
                 return true;
             }
             return false;
@@ -30,7 +37,15 @@ namespace CarRentalMS.Services
 
         public bool Logout()
         {
-            throw new NotImplementedException();
+            try
+            {
+                FormsAuthentication.SignOut();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         // Encryption & Decryption

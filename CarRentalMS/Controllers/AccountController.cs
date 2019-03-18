@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using System.Web.Security;
 using CarRentalMS.DataAccess;
 using CarRentalMS.Services.Interfaces;
 using CarRentalMS.ViewModels;
@@ -22,31 +21,35 @@ namespace CarRentalMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserAccountViewModel userVM)
+        public ActionResult Login(UserAccountViewModel userVM, bool stayLogin)
         {
             if (ModelState.IsValid)
             {
                 UserAccount userDM = new UserAccount();
                 AutoMapper.Mapper.Map(userVM, userDM);
 
-                var loginSuccess = _accountServices.Login(userDM);
+                var loginSuccess = _accountServices.Login(userDM, stayLogin);
 
                 if (loginSuccess == true)
                 {
-                    FormsAuthentication.SetAuthCookie(userDM.UserName, false); //Persistent Cookie
                     TempData["msgSuccess"] = "Log In";
                     return RedirectToAction("Index", "Home");
                 }
             }
-            //ViewBag.Msg = "Invalid User";
             TempData["msgFailed"] = "Log In";
             return View();
         }
 
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            var logoutSuccess = _accountServices.Logout();
+            if (logoutSuccess)
+            {
+                TempData["msgSuccess"] = "Log Out";
+                return RedirectToAction("Index", "Home");
+            }
+            TempData["msgFailed"] = "Log Out";
+            return View();
         }
 
 
