@@ -23,16 +23,6 @@ namespace CarRentalMS.DataAccess.Repositories
                 .AsQueryable();
         }
 
-        //public async Task<Car> FindCarById(int? id)
-        //{
-        //    //return await DbContext.Set<Car>().FindAsync(id);
-        //    var obj= await (from car in DbContext.Cars
-        //                 join company in DbContext.Companies on car.CompanyId equals company.CompanyId
-        //                 where car.Id == id
-        //                 select new { Id= car.Id, CarModel= car.CarModel, Location= car.Location, PricePerDay= car.PricePerDay}).FirstOrDefaultAsync();
-        //    return obj;
-        //}
-
         public async Task<int> GetMaxId()
         {
             return await DbContext.Cars.MaxAsync(c => c.Id);
