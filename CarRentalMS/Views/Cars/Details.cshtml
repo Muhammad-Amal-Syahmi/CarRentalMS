@@ -32,6 +32,16 @@
             @Html.DisplayFor(model => model.PricePerDay)
         </dd>
 
+        @if (User.IsInRole("Admin"))
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifiedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastModifiedDate)
+            </dd>
+        }
     </dl>
 </div>
 <p>
