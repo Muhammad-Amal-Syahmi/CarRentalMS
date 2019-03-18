@@ -5,11 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using CarRentalMS.DataAccess;
+using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
     public class AccountController : Controller
     {
+        AWS_POSTGREQL_TRIALEntities dbContext = new AWS_POSTGREQL_TRIALEntities();
+
         // GET: Account
         public ActionResult Login()
         {
@@ -17,27 +20,23 @@ namespace CarRentalMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserAccount user)
+        public ActionResult Login(UserAccountViewModel userVM)
         {
-            AWS_POSTGREQL_TRIALEntities dbContext = new AWS_POSTGREQL_TRIALEntities();
-            var Acc = dbContext.UserAccounts.Where(x => x.UserName == user.UserName).FirstOrDefault();
-            if (user.UserPassword == Decrypt(Acc.UserPassword))
+            if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(user.UserName, false); //Persistent Cookie
-                return RedirectToAction("Index", "Home");
+                UserAccount userDM = new UserAccount();
+                AutoMapper.Mapper.Map(userVM, userDM);
+                var Acc = dbContext.UserAccounts.Where(x => x.UserName == userDM.UserName).FirstOrDefault();
+                if (Acc != null && userDM.UserPassword == Decrypt(Acc.UserPassword))
+                {
+                    FormsAuthentication.SetAuthCookie(userDM.UserName, false); //Persistent Cookie
+                    TempData["msgSuccess"] = "Log In";
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            ViewBag.Msg = "Invalid User";
+            //ViewBag.Msg = "Invalid User";
+            TempData["msgFailed"] = "Log In";
             return View();
-            //if (count == 0)
-            //{
-            //    ViewBag.Msg = "Invalid User";
-            //    return View();
-            //}
-            //else
-            //{
-            //    FormsAuthentication.SetAuthCookie(user.UserName, false); //Persistent Cookie
-            //    return RedirectToAction("Index", "Home");
-            //}
         }
 
         public ActionResult Logout()

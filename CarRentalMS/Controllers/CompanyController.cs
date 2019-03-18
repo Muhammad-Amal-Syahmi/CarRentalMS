@@ -63,6 +63,7 @@ namespace CarRentalMS.Controllers
 
         // POST: Company/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "CompanyName,CompanyEmail")] CompanyViewModel companyVM, bool AddAnotherCheckbox)
         {
             if (ModelState.IsValid)
@@ -100,18 +101,19 @@ namespace CarRentalMS.Controllers
 
         // POST: Company/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "CompanyID,CompanyName,CompanyEmail")] CompanyViewModel companyVM)
         {
-            try
+            //carVM.LastModifiedDate = _carServices.GetCurrentDate();
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                Company companyDM = new Company();
+                AutoMapper.Mapper.Map(companyVM, companyDM);
+                await _companyServices.UpdateCompany(companyDM);
+                TempData["msgSuccess"] = "Company Edited";
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(companyVM);
         }
 
         // GET: Company/Delete/5
@@ -132,18 +134,20 @@ namespace CarRentalMS.Controllers
         }
 
         // POST: Company/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                Company companyDM = await _companyServices.FindCompany(id);
+                await _companyServices.DeleteCompany(companyDM);
+                TempData["msgSuccess"] = "Company Deleted";
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("NotFound", "Error");
             }
         }
     }
