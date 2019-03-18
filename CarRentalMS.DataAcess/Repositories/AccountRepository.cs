@@ -12,7 +12,7 @@ namespace CarRentalMS.DataAcess.Repositories
 
         public UserAccount UserLogin(UserAccount user)
         {
-            return DbContext.Set<UserAccount>().Where(x => x.UserName == user.UserName).FirstOrDefault();
+            return DbContext.Set<UserAccount>().Where(x => x.EmailAddress == user.EmailAddress).FirstOrDefault();
         }
 
     }

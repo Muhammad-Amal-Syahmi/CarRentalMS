@@ -19,16 +19,16 @@ namespace CarRentalMS.Services
         public bool Login(UserAccount user, bool stayLogin)
         {
             var passwordHash = GetMD5Hash(user.UserPassword);
-            var Acc = _accountRepository.UserLogin(user);
-            if (Acc != null && passwordHash == Acc.UserPassword)
+            var account = _accountRepository.UserLogin(user);
+            if (account != null && passwordHash == account.UserPassword)
             {
                 if (stayLogin == true)
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserName, true); //Persistent Cookie
+                    FormsAuthentication.SetAuthCookie(account.UserName, true); //Persistent Cookie
                 }
                 else
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserName, false); //Non-Persistent Cookie
+                    FormsAuthentication.SetAuthCookie(account.UserName, false); //Non-Persistent Cookie
                 }
                 return true;
             }

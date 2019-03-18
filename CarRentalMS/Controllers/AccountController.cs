@@ -16,13 +16,17 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Account
-        public ActionResult Login()
+        public ActionResult Login(string ReturnUrl)
         {
+            if (!string.IsNullOrEmpty(ReturnUrl))
+            {
+                ViewBag.ReturnUrl = Server.UrlDecode(ReturnUrl);
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(UserAccountViewModel userVM, bool stayLogin)
+        public ActionResult Login([Bind(Include = "EmailAddress,UserPassword")]UserAccountViewModel userVM, bool stayLogin, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -34,7 +38,14 @@ namespace CarRentalMS.Controllers
                 if (loginSuccess == true)
                 {
                     TempData["msgSuccess"] = "Log In";
-                    return RedirectToAction("Index", "Home");
+                    if (Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
             }
             TempData["msgFailed"] = "Log In";

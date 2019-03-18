@@ -9,7 +9,6 @@ using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
-    [AllowAnonymous]
     public class CarsController : Controller
     {
         private readonly ICarServices _carServices;
@@ -20,6 +19,7 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars
+        [AllowAnonymous]
         public async Task<ActionResult> Index(string SearchCarModel, string SearchLocation)
         {
             try
@@ -38,6 +38,7 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Details/5
+        [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
