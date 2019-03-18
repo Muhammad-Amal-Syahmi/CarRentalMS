@@ -76,8 +76,9 @@ namespace CarRentalMS.Controllers
                 AutoMapper.Mapper.Map(carVM, carDM);
                 await _carServices.AddCar(carDM);
                 TempData["msgSuccess"] = "Car Added";
-                if(AddAnotherCheckbox == true)
+                if (AddAnotherCheckbox == true)
                 {
+                    TempData["Checkbox"] = true;
                     return RedirectToAction("Create");
                 }
                 return RedirectToAction("Index");

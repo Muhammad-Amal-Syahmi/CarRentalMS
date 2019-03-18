@@ -74,6 +74,7 @@ namespace CarRentalMS.Controllers
                 TempData["msgSuccess"] = "Company Added";
                 if (AddAnotherCheckbox == true)
                 {
+                    TempData["Checkbox"] = true;
                     return RedirectToAction("Create");
                 }
                 return RedirectToAction("Index");
