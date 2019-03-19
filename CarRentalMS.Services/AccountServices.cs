@@ -2,7 +2,7 @@
 using System.Text;
 using System.Web.Security;
 using CarRentalMS.DataAccess;
-using CarRentalMS.DataAcess.Repositories.Interfaces;
+using CarRentalMS.DataAccess.Repositories.Interfaces;
 using CarRentalMS.Services.Interfaces;
 
 namespace CarRentalMS.Services

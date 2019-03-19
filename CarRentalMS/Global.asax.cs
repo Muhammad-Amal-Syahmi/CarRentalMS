@@ -8,8 +8,6 @@ using CarRentalMS.DataAccess.Infrastructure;
 using CarRentalMS.DataAccess.Infrastructure.Interfaces;
 using CarRentalMS.DataAccess.Repositories;
 using CarRentalMS.DataAccess.Repositories.Interfaces;
-using CarRentalMS.DataAcess.Repositories;
-using CarRentalMS.DataAcess.Repositories.Interfaces;
 using CarRentalMS.Infrastructure;
 using CarRentalMS.Services;
 using CarRentalMS.Services.Interfaces;

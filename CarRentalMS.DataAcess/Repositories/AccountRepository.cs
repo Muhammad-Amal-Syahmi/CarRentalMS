@@ -2,9 +2,9 @@
 using CarRentalMS.DataAccess;
 using CarRentalMS.DataAccess.Infrastructure;
 using CarRentalMS.DataAccess.Infrastructure.Interfaces;
-using CarRentalMS.DataAcess.Repositories.Interfaces;
+using CarRentalMS.DataAccess.Repositories.Interfaces;
 
-namespace CarRentalMS.DataAcess.Repositories
+namespace CarRentalMS.DataAccess.Repositories
 {
     public class AccountRepository : GenericRepository<UserAccount>, IAccountRepository
     {

@@ -1,7 +1,7 @@
 ﻿using CarRentalMS.DataAccess;
 using CarRentalMS.DataAccess.Infrastructure.Interfaces;
 
-namespace CarRentalMS.DataAcess.Repositories.Interfaces
+namespace CarRentalMS.DataAccess.Repositories.Interfaces
 {
     public interface IAccountRepository : IGenericRepository<UserAccount>
     {
