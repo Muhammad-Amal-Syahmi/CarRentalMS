@@ -24,23 +24,6 @@
           <Property Name="CompanyName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CompanyEmail" Type="varchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="UserAccount">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="text" Nullable="false" />
-          <Property Name="EmailAddress" Type="text" Nullable="false" />
-          <Property Name="UserPassword" Type="text" Nullable="false" />
-          <Property Name="UserRoleID" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserRole">
-          <Key>
-            <PropertyRef Name="UserRoleID" />
-          </Key>
-          <Property Name="UserRoleID" Type="int4" Nullable="false" />
-          <Property Name="Role" Type="text" Nullable="false" />
-        </EntityType>
         <Association Name="companyId_fk">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
@@ -53,30 +36,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="User_ACC_FK">
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
-          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="UserRoleID" />
-            </Principal>
-            <Dependent Role="UserAccount">
-              <PropertyRef Name="UserRoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="AWS_POSTGREQL_TRIALModelStoreContainer">
           <EntitySet Name="Car" EntityType="Self.Car" Schema="public" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="public" store:Type="Tables" />
-          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="public" store:Type="Tables" />
-          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="public" store:Type="Tables" />
           <AssociationSet Name="companyId_fk" Association="Self.companyId_fk">
             <End Role="Company" EntitySet="Company" />
             <End Role="Car" EntitySet="Car" />
-          </AssociationSet>
-          <AssociationSet Name="User_ACC_FK" Association="Self.User_ACC_FK">
-            <End Role="UserRole" EntitySet="UserRole" />
-            <End Role="UserAccount" EntitySet="UserAccount" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -84,12 +49,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="AWS_POSTGREQL_TRIALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AWS_POSTGREQL_TRIALEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UserAccounts" EntityType="AWS_POSTGREQL_TRIALModel.UserAccount" />
-          <EntitySet Name="UserRoles" EntityType="AWS_POSTGREQL_TRIALModel.UserRole" />
-          <AssociationSet Name="User_ACC_FK" Association="AWS_POSTGREQL_TRIALModel.User_ACC_FK">
-            <End Role="UserRole" EntitySet="UserRoles" />
-            <End Role="UserAccount" EntitySet="UserAccounts" />
-          </AssociationSet>
           <EntitySet Name="Cars" EntityType="AWS_POSTGREQL_TRIALModel.Car" />
           <EntitySet Name="Companies" EntityType="AWS_POSTGREQL_TRIALModel.Company" />
           <AssociationSet Name="companyId_fk" Association="AWS_POSTGREQL_TRIALModel.companyId_fk">
@@ -97,37 +56,6 @@
             <End Role="Car" EntitySet="Cars" />
           </AssociationSet>
           </EntityContainer>
-        <EntityType Name="UserAccount">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="UserRole" Relationship="AWS_POSTGREQL_TRIALModel.User_ACC_FK" FromRole="UserAccount" ToRole="UserRole" />
-        </EntityType>
-        <EntityType Name="UserRole">
-          <Key>
-            <PropertyRef Name="UserRoleID" />
-          </Key>
-          <Property Name="UserRoleID" Type="Int32" Nullable="false" />
-          <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserAccounts" Relationship="AWS_POSTGREQL_TRIALModel.User_ACC_FK" FromRole="UserRole" ToRole="UserAccount" />
-        </EntityType>
-        <Association Name="User_ACC_FK">
-          <End Type="AWS_POSTGREQL_TRIALModel.UserRole" Role="UserRole" Multiplicity="1" />
-          <End Type="AWS_POSTGREQL_TRIALModel.UserAccount" Role="UserAccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="UserRoleID" />
-            </Principal>
-            <Dependent Role="UserAccount">
-              <PropertyRef Name="UserRoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Car">
           <Key>
             <PropertyRef Name="Id" />
@@ -167,25 +95,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AWS_POSTGREQL_TRIALModelStoreContainer" CdmEntityContainer="AWS_POSTGREQL_TRIALEntities">
-          <EntitySetMapping Name="UserAccounts">
-            <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.UserAccount">
-              <MappingFragment StoreEntitySet="UserAccount">
-                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
-                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.UserRole">
-              <MappingFragment StoreEntitySet="UserRole">
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="AWS_POSTGREQL_TRIALModel.Car">
               <MappingFragment StoreEntitySet="Car">

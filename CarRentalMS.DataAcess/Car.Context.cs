@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRentalMS.DataAccess
+namespace CarRentalMS.DataAcess
 {
     using System;
     using System.Data.Entity;
@@ -25,8 +25,6 @@ namespace CarRentalMS.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<UserAccount> UserAccounts { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
     }

@@ -101,12 +101,6 @@
     <Compile Include="Repositories\Interfaces\IAccountRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICarRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICompanyRepository.cs" />
-    <Compile Include="UserAccount.cs">
-      <DependentUpon>Car.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserRole.cs">
-      <DependentUpon>Car.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
