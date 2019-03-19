@@ -101,7 +101,7 @@ namespace CarRentalMS.Tests
                 var actual = cls.GetAllCars(null, null).ToList();
 
                 //Assert
-                Assert.True(actual != null);
+                Assert.False(actual == null);
                 Assert.Equal(expected.Count(), actual.Count());
 
                 for (int i = 0; i < expected.Count(); i++)
@@ -131,7 +131,7 @@ namespace CarRentalMS.Tests
                 var actual = cls.GetAllCars("Saga", "").ToList();
 
                 //Assert
-                Assert.True(actual != null);
+                Assert.False(actual == null);
                 Assert.Equal(expected.Count(), actual.Count());
 
                 for (int i = 0; i < expected.Count(); i++)
@@ -153,8 +153,7 @@ namespace CarRentalMS.Tests
                 var car = GetASampleCar();
                 mock.Mock<ICarRepository>()
                     .Setup(x => x.Create(car));
-                //mock.Mock<IUnitOfWork>()
-                //    .Setup(x => x.SaveChangesAsync());
+
 
                 var cls = mock.Create<CarServices>();
 
@@ -164,8 +163,7 @@ namespace CarRentalMS.Tests
                 //Assert
                 mock.Mock<ICarRepository>()
                     .Verify(x => x.Create(car), Times.Exactly(1));
-                //mock.Mock<IUnitOfWork>()
-                //    .Verify(x => x.SaveChangesAsync(), Times.Exactly(1));
+
 
             }
         }
@@ -203,6 +201,7 @@ namespace CarRentalMS.Tests
                     .Setup(m => m.FindById(3))
                     .Returns(Task.FromResult(GetASampleCar()));
 
+
                 var cls = mock.Create<CarServices>();
                 var expected = GetASampleCar();
 
@@ -210,7 +209,7 @@ namespace CarRentalMS.Tests
                 Car actual = await cls.FindCar(3);
 
                 //Assert
-                Assert.True(actual != null);
+                Assert.False(actual == null);
                 Assert.Equal(expected.Id, actual.Id);
                 Assert.Equal(expected.CarModel, actual.CarModel);
                 Assert.Equal(expected.Location, actual.Location);
@@ -237,7 +236,6 @@ namespace CarRentalMS.Tests
                 //Assert
                 mock.Mock<ICarRepository>()
                     .Verify(x => x.Update(car), Times.Exactly(1));
-
             }
         }
 
@@ -309,38 +307,5 @@ namespace CarRentalMS.Tests
             }
         }
 
-
-
-        //[Fact]
-        //public async Task FindCar_ShouldReturnACarVersion2()
-        //{
-        //    //Arrange
-        //    var dataSource = new Mock<ICarRepository>();
-        //    var unitOfWork = new Mock<IUnitOfWork>();
-
-        //    var car = new Car
-        //    {
-        //        Id = 3,
-        //        CarModel = "Wira",
-        //        Location = "Bayan Lepas",
-        //        PricePerDay = 108.50
-        //    };
-        //    var carAsync = Task.FromResult(car);
-
-        //    dataSource.Setup(m => m.FindById(3))
-        //        .Returns(carAsync);
-
-        //    var classThatWereActuallyTesting = new CarServices(unitOfWork.Object, dataSource.Object);
-
-        //    //Act
-        //    Car isCar = await classThatWereActuallyTesting.FindCar(3);
-
-        //    //Assert
-        //    Assert.True(isCar != null);
-        //    Assert.Equal(car.Id, isCar.Id);
-        //    Assert.Equal(car.CarModel, isCar.CarModel);
-        //    Assert.Equal(car.Location, isCar.Location);
-        //    Assert.Equal(car.PricePerDay, isCar.PricePerDay);
-        //}
     }
 }
