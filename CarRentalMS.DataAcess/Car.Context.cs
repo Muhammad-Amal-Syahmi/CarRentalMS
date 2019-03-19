@@ -19,12 +19,6 @@ namespace CarRentalMS.DataAccess
         {
         }
 
-        //called by Startup.Auth
-        public static AWS_POSTGREQL_TRIALEntities Create()
-        {
-            return new AWS_POSTGREQL_TRIALEntities();
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -32,5 +26,9 @@ namespace CarRentalMS.DataAccess
 
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

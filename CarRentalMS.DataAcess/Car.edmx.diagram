@@ -8,6 +8,13 @@
         <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.Car" Width="1.5" PointX="12.125" PointY="1.625" />
         <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.Company" Width="1.5" PointX="9.875" PointY="2" />
         <AssociationConnector Association="AWS_POSTGREQL_TRIALModel.companyId_fk" />
+        <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="AWS_POSTGREQL_TRIALModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="AWS_POSTGREQL_TRIALModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AWS_POSTGREQL_TRIALModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AWS_POSTGREQL_TRIALModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

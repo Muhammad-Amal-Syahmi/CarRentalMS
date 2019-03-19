@@ -98,6 +98,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>Car.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>Car.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>Car.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>Car.tt</DependentUpon>
+    </Compile>
     <Compile Include="Car.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
