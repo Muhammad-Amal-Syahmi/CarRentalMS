@@ -13,19 +13,22 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-    @* DataTable *@
+    <!--#region DataTable JS & CSS  -->
     <link href="~/Content/DataTable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <script src="~/Scripts/DataTable/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/DataTable/dataTables.bootstrap4.min.js "></script>
+    <!--#endregion -->
 
-    @* Toastr *@
+    <!--#region Toastr JS & CSS  -->
     <script src="~/Scripts/toastr.js"></script>
     <link href="~/Content/toastr.css" rel="stylesheet" />
+    <!--#endregion -->
 
-    @* Font Awesome Icons *@
+    <!--#region FontAwesome Icon JS & CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
           crossorigin="anonymous">
+    <!--#endregion-->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,11 +43,36 @@
                 <li class="nav-item active loading">@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active loading">@Html.ActionLink("Companies", "Index", "Company", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item active">@Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item active">@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item nav-link active">@User.Identity.GetUserName()</li>
-</ul>
+            </ul>
             <div class="dropdown-divider"></div>
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @User.Identity.GetUserName()
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Gigs I'm Going</a></li>
+                                <li><a class="dropdown-item" href="#">Artists I'm Following</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item active loading">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link " })</li>
+                    <li class="nav-item active loading">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link " })</li>
+                </ul>
+            }
 
         </div>
     </nav>
@@ -57,7 +85,7 @@
         </footer>
     </div>
 
-    <!-- Loading Modal -->
+    <!-- #region Loading Modal-->
     <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered " role="document">
             <div class="modal-content">
@@ -81,7 +109,9 @@
             })
         });
     </script>
+    <!-- #endregion =-->
 
+    <!--#region Toastr-->
     @if (TempData["msgSuccess"] != null)
     {
         <script>
@@ -129,6 +159,7 @@
             toastr.error("Fail to "+"@TempData["msgFailed"]"+"!");
         </script>
     }
+    <!--#endregion-->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
