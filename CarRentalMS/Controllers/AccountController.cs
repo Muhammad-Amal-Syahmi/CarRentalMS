@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using CarRentalMS.DataAccess;
+using CarRentalMS.Model;
 using CarRentalMS.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -151,9 +151,9 @@ namespace CarRentalMS.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Name = model.Name
+                    UserName = model.Name,
+                    Email = model.Email
+
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

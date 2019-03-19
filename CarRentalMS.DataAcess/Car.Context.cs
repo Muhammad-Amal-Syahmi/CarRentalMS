@@ -11,12 +11,18 @@ namespace CarRentalMS.DataAccess
 {
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public partial class AWS_POSTGREQL_TRIALEntities : DbContext
     {
         public AWS_POSTGREQL_TRIALEntities()
             : base("name=AWS_POSTGREQL_TRIALEntities")
         {
+        }
+
+        public static AWS_POSTGREQL_TRIALEntities Create()
+        {
+            return new AWS_POSTGREQL_TRIALEntities();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

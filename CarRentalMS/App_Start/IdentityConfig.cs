@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CarRentalMS.DataAccess;
 using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -40,7 +41,7 @@ namespace CarRentalMS
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<AWS_POSTGREQL_TRIALEntities>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<IdentityContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

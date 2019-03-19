@@ -1,6 +1,6 @@
 ﻿using System;
 using CarRentalMS.DataAccess;
-using CarRentalMS.DataAccess.Infrastructure.Interfaces;
+using CarRentalMS.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -15,7 +15,7 @@ namespace CarRentalMS
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(AWS_POSTGREQL_TRIALEntities.Create);
+            app.CreatePerOwinContext(IdentityContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

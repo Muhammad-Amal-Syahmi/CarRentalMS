@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -38,9 +40,12 @@
                 <li class="nav-item active loading">@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active loading">@Html.ActionLink("Companies", "Index", "Company", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-            </ul>
+                <li class="nav-item active">@Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item active">@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item nav-link active">@User.Identity.GetUserName()</li>
+</ul>
             <div class="dropdown-divider"></div>
-           
+
         </div>
     </nav>
 
