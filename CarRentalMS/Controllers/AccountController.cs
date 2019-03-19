@@ -151,13 +151,22 @@ namespace CarRentalMS.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Name,
+                    //make email as username too
+                    UserName = model.Email,
                     Email = model.Email
 
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //Temp code for creating role
+                    //var roleStore = new RoleStore<IdentityRole>(new IdentityContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageCompanies"));
+
+                    //temp code for add role as user
+                    await UserManager.AddToRoleAsync(user.Id, "User");
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
