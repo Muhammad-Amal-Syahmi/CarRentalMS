@@ -9,22 +9,27 @@
 
 namespace CarRentalMS.DataAccess
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class AWS_POSTGREQL_TRIALEntities : DbContext
     {
         public AWS_POSTGREQL_TRIALEntities()
             : base("name=AWS_POSTGREQL_TRIALEntities")
         {
         }
-    
+
+        //called by Startup.Auth
+        public static AWS_POSTGREQL_TRIALEntities Create()
+        {
+            return new AWS_POSTGREQL_TRIALEntities();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
     }
