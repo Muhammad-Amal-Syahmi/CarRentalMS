@@ -13,8 +13,6 @@ namespace CarRentalMS.Infrastructure
             CreateMap<Company, CompanyViewModel>();
             CreateMap<CompanyViewModel, Company>();
 
-            CreateMap<UserAccount, UserAccountViewModel>();
-            CreateMap<UserAccountViewModel, UserAccount>();
         }
 
         public static void Run()

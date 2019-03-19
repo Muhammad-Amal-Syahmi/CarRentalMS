@@ -9,6 +9,7 @@ using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
+    [AllowAnonymous]
     public class CarsController : Controller
     {
         private readonly ICarServices _carServices;
@@ -19,7 +20,6 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars
-        [AllowAnonymous]
         public async Task<ActionResult> Index(string SearchCarModel, string SearchLocation)
         {
             try
@@ -38,7 +38,6 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Details/5
-        [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -57,14 +56,12 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Cars/Create
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "CarModel,Location,PricePerDay")] CarViewModel carVM, bool AddAnotherCheckbox)
@@ -88,7 +85,6 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Edit/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -106,7 +102,6 @@ namespace CarRentalMS.Controllers
         }
 
         // POST: Cars/Edit/5
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,CarModel,Location,PricePerDay")] CarViewModel carVM)
@@ -124,7 +119,6 @@ namespace CarRentalMS.Controllers
         }
 
         // GET: Cars/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +136,6 @@ namespace CarRentalMS.Controllers
         }
 
         // POST: Cars/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

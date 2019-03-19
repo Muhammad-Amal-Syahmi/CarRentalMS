@@ -37,10 +37,8 @@ namespace CarRentalMS
             //manual registration of types
             builder.RegisterType<CarServices>().As<ICarServices>();
             builder.RegisterType<CompanyServices>().As<ICompanyServices>();
-            builder.RegisterType<AccountServices>().As<IAccountServices>();
             builder.RegisterType<CarRepository>().As<ICarRepository>();
             builder.RegisterType<CompanyRepository>().As<ICompanyRepository>();
-            builder.RegisterType<AccountRepository>().As<IAccountRepository>();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 

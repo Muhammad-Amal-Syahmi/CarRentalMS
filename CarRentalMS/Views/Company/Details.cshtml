@@ -26,15 +26,7 @@
     </dl>
 </div>
 <p>
-    @if (User.IsInRole("Admin"))
-    {
         <a class="btn btn-warning btn-inside-options" onclick="GoEditCompany(@Model.CompanyId)">Edit</a>
-    }
-    else
-    {
-        //book now
-        <a href="#" class="btn btn-primary btn-inside-options">Book Now</a>
-    }
     <a onclick="BackToList()" class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
 </p>
 

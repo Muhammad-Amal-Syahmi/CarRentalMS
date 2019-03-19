@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRentalMS.DataAcess
+namespace CarRentalMS.DataAccess
 {
     using System;
     using System.Collections.Generic;

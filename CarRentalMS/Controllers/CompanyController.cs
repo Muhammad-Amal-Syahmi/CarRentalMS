@@ -9,7 +9,7 @@ using CarRentalMS.ViewModels;
 
 namespace CarRentalMS.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     public class CompanyController : Controller
     {
         AWS_POSTGREQL_TRIALEntities db = new AWS_POSTGREQL_TRIALEntities();

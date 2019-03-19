@@ -36,28 +36,11 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active loading">@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li class="nav-item active loading">@Html.ActionLink("Companies", "Index", "Company", new { area = "" }, new { @class = "nav-link" })</li>
-                }
+                <li class="nav-item active loading">@Html.ActionLink("Companies", "Index", "Company", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
             <div class="dropdown-divider"></div>
-            <div class="dropdown">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a class="dropdown-toggle nav-link" style="color:white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Welcome @User.Identity.Name</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a href="@Url.Action("Logout", "Account")" data-toggle="tooltip" data-placement="top" title="Edit" class="nav-link text-dark"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-                    </div>
-                }
-                else
-                {
-                    <a href="@Url.Action("Login", "Account")" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-success text-white"><i class="fas fa-sign-in-alt"></i> Log In</a>
-                }
-            </div>
+           
         </div>
     </nav>
 
