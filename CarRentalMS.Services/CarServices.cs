@@ -44,8 +44,6 @@ namespace CarRentalMS.Services
         public virtual async Task<Car> FindCar(int? id)
         {
             var car = await _carRepository.FindById(id);
-            if (car.CarModel == null)
-                return null;
             return car;
         }
 

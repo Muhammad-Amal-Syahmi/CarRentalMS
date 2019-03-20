@@ -77,6 +77,7 @@ namespace CarRentalMS.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    TempData["msgSuccess"] = "Login";
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -84,6 +85,7 @@ namespace CarRentalMS.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
                 default:
+                    TempData["msgFailed"] = "Login";
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
@@ -175,12 +177,14 @@ namespace CarRentalMS.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    TempData["msgSuccess"] = "User Registered";
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
+            TempData["msgFailed"] = "Register User";
             return View(model);
         }
 

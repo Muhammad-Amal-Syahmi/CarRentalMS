@@ -46,12 +46,12 @@ namespace CarRentalMS.Controllers
                 return RedirectToAction("NotFound", "Error");
             }
             var carDM = await _carServices.FindCar(id);
-            CarViewModel carVM = new CarViewModel();
-            AutoMapper.Mapper.Map(carDM, carVM);
-            if (carVM == null)
+            if (carDM == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
+            CarViewModel carVM = new CarViewModel();
+            AutoMapper.Mapper.Map(carDM, carVM);
             return PartialView("Details", carVM);
 
         }
@@ -96,12 +96,12 @@ namespace CarRentalMS.Controllers
                 return RedirectToAction("NotFound", "Error");
             }
             Car carDM = await _carServices.FindCar(id);
-            CarViewModel carVM = new CarViewModel();
-            AutoMapper.Mapper.Map(carDM, carVM);
-            if (carVM == null)
+            if(carDM == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
+            CarViewModel carVM = new CarViewModel();
+            AutoMapper.Mapper.Map(carDM, carVM);
             return View(carVM);
         }
 
@@ -132,12 +132,12 @@ namespace CarRentalMS.Controllers
                 return RedirectToAction("NotFound", "Error");
             }
             Car carDM = await _carServices.FindCar(id);
-            CarViewModel carVM = new CarViewModel();
-            AutoMapper.Mapper.Map(carDM, carVM);
-            if (carVM == null)
+            if (carDM == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
+            CarViewModel carVM = new CarViewModel();
+            AutoMapper.Mapper.Map(carDM, carVM);
             return PartialView("Delete", carVM);
         }
 
