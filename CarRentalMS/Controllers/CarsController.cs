@@ -96,13 +96,13 @@ namespace CarRentalMS.Controllers
                 return RedirectToAction("NotFound", "Error");
             }
             Car carDM = await _carServices.FindCar(id);
-            if(carDM == null)
+            if (carDM == null)
             {
                 return RedirectToAction("NotFound", "Error");
             }
             CarViewModel carVM = new CarViewModel();
             AutoMapper.Mapper.Map(carDM, carVM);
-            return View(carVM);
+            return PartialView(carVM);
         }
 
         // POST: Cars/Edit/5

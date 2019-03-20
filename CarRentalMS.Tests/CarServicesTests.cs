@@ -18,35 +18,10 @@ namespace CarRentalMS.Tests
         {
             List<Car> output = new List<Car>
             {
-                new Car
-                {
-                    Id= 1,
-                    CarModel= "Saga",
-                    Location= "Bayan Baru",
-                    PricePerDay= 110.00
-                },
-                new Car
-                {
-                    Id=2,
-                    CarModel= "Wira",
-                    Location= "Bayan Lepas",
-                    PricePerDay= 108
-                },
-                new Car
-                {
-                    Id= 3,
-                    CarModel= "Avanza",
-                    Location= "Bandar Baru",
-                    PricePerDay= 134.56
-                },
-                new Car
-                {
-                    Id= 4,
-                    CarModel= "Saga",
-                    Location= "Bukit Mertajam",
-                    PricePerDay= 98.50
-                }
-
+                new Car{Id= 1,CarModel= "Saga",Location= "Bayan Baru",PricePerDay= 110.00},
+                new Car{Id=2,CarModel= "Wira",Location= "Bayan Lepas",PricePerDay= 108},
+                new Car{Id= 3,CarModel= "Avanza",Location= "Bandar Baru",PricePerDay= 134.56},
+                new Car{Id= 4,CarModel= "Saga",Location= "Bukit Mertajam",PricePerDay= 98.50}
             };
             return output;
         }
@@ -55,34 +30,15 @@ namespace CarRentalMS.Tests
         {
             List<Car> output = new List<Car>
             {
-                new Car
-                {
-                    Id= 1,
-                    CarModel= "Saga",
-                    Location= "Bayan Baru",
-                    PricePerDay= 110.00
-                },
-                new Car
-                {
-                    Id= 4,
-                    CarModel= "Saga",
-                    Location= "Bukit Mertajam",
-                    PricePerDay= 98.50
-                }
-
+                new Car{ Id= 1,CarModel= "Saga",Location= "Bayan Baru",PricePerDay= 110.00},
+                new Car{Id= 4,CarModel= "Saga",Location= "Bukit Mertajam",PricePerDay= 98.50}
             };
             return output;
         }
 
         private Car GetASampleCar()
         {
-            return new Car
-            {
-                Id = 3,
-                CarModel = "Wira",
-                Location = "Bayan Lepas",
-                PricePerDay = 108.50
-            };
+            return new Car { Id = 3, CarModel = "Wira", Location = "Bayan Lepas", PricePerDay = 108.50 };
         }
 
         [Fact]
@@ -152,10 +108,7 @@ namespace CarRentalMS.Tests
             {
                 //Arrange
                 var car = GetASampleCar();
-                mock.Mock<ICarRepository>()
-                    .Setup(x => x.Create(car));
-
-
+                mock.Mock<ICarRepository>();
                 var cls = mock.Create<CarServices>();
 
                 //Act
@@ -306,6 +259,25 @@ namespace CarRentalMS.Tests
                     Assert.Equal("deleteCar", argEx.ParamName);
                 }
             }
+        }
+
+        [Fact]
+        public void GetCurrentDate_ShouldWork()
+        {
+            using (var mock = AutoMock.GetLoose())
+            {
+                //Arrange
+                mock.Mock<ICarRepository>();
+                var cls = mock.Create<CarServices>();
+
+                //Act
+                var actualDateTime = cls.GetCurrentDate();
+
+                //Assert
+                Assert.NotNull(actualDateTime);
+            }
+
+
         }
 
     }
