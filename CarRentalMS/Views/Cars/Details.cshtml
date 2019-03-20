@@ -41,8 +41,14 @@
     </dl>
 </div>
 <p>
-    <a class="btn btn-warning btn-inside-options" onclick="GoEditCar(@Model.Id)">Edit</a>
-    <a href="#" class="btn btn-primary btn-inside-options">Book Now</a>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <a class="btn btn-warning btn-inside-options" onclick="GoEditCar(@Model.Id)">Edit</a>
+    }
+    else
+    {
+        <a href="#" class="btn btn-primary btn-inside-options">Book Now</a>
+    }
     <a onclick="BackToList()" class="btn btn-outline-info btn-inside-options btn-back-list">Back to List</a>
 </p>
 

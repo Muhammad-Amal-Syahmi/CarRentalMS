@@ -23,10 +23,12 @@
                 </div>
             </div>
         }
-        <div class="ml-auto" style="font-size:2em;">
-            <a href="@Url.Action("Create","Cars")" data-toggle="tooltip" data-placement="top" title="Add New Car"><i class="fas fa-plus-circle text-success loading"></i></a>
-        </div>
-
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <div class="ml-auto" style="font-size:2em;">
+                <a href="@Url.Action("Create","Cars")" data-toggle="tooltip" data-placement="top" title="Add New Car"><i class="fas fa-plus-circle text-success loading"></i></a>
+            </div>
+        }
     </div>
 </div>
 
@@ -34,61 +36,67 @@
     <table id="table_id" class="table table-hover table-bordered table-striped table-car">
         <thead>
             <tr>
-                @*<th>
-                    @Html.DisplayName("Id")
-                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.CarModel)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Location)
                 </th>
-                <th style="width: 20%">
-                    @Html.DisplayNameFor(model => model.LastModifiedDate)
-                </th>
-                <th style="width: 10%">
-                    @Html.DisplayName("Options")
-                </th>
-                <th>
-                    @Html.DisplayName("Price Per Day")
-                </th>
-                <th>
-                    @Html.DisplayName("Details")
-                </th>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <th style="width: 20%">
+                        @Html.DisplayNameFor(model => model.LastModifiedDate)
+                    </th>
+                    <th style="width: 10%">
+                        @Html.DisplayName("Options")
+                    </th>
+                }
+                else
+                {
+                    <th>
+                        @Html.DisplayName("Price Per Day")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Details")
+                    </th>
+                }
+
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    @*<td style="width: 7%">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.CarModel)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Location)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastModifiedDate)
-                    </td>
-                    <td>
-                        <span style="font-size: 1.5em;">
-                            <a class="btn-options" onclick="EditCar(@item.Id)" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
-                            <a class="btn-options" onclick="CarDetails(@item.Id)" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
-                            <a class="btn-options" onclick="DeleteCar(@item.Id)" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt text-danger"></i></a>
-                        </span>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PricePerDay)
-                    </td>
-                    <td style="width:8%; text-align:center;">
-                        <span style="font-size: 1.5em; ">
-                            <a class="btn-options" onclick="CarDetails(@item.Id)" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
-                        </span>
-                    </td>
-
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") == true)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastModifiedDate)
+                        </td>
+                        <td>
+                            <span style="font-size: 1.5em;">
+                                <a class="btn-options" onclick="EditCar(@item.Id)" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit text-warning"></i></a>
+                                <a class="btn-options" onclick="CarDetails(@item.Id)" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
+                                <a class="btn-options" onclick="DeleteCar(@item.Id)" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt text-danger"></i></a>
+                            </span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PricePerDay)
+                        </td>
+                        <td style="width:8%; text-align:center;">
+                            <span style="font-size: 1.5em; ">
+                                <a class="btn-options" onclick="CarDetails(@item.Id)" data-toggle="tooltip" data-placement="top" title="See Details"><i class="fas fa-info-circle text-info"></i></a>
+                            </span>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>
