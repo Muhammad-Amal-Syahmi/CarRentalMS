@@ -1,5 +1,4 @@
 ﻿using System;
-using CarRentalMS.DataAccess;
 using CarRentalMS.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;

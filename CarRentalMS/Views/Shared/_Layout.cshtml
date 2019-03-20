@@ -41,7 +41,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item active loading">@Html.ActionLink("Cars", "Index", "Cars", new { area = "" }, new { @class = "nav-link" })</li>
-                @if (Request.IsAuthenticated)
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
                     <li class="nav-item active loading">@Html.ActionLink("Companies", "Index", "Company", new { area = "" }, new { @class = "nav-link" })</li>
                 }
