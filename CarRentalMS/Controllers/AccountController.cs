@@ -73,7 +73,16 @@ namespace CarRentalMS.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var user = await UserManager.FindByEmailAsync(model.Email);
+
+            if(user == null)
+            {
+                TempData["msgFailed"] = "Login";
+                ModelState.AddModelError("", "Email not found. Are you sure you already registered?");
+                return View(model);
+            }
+
+            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
